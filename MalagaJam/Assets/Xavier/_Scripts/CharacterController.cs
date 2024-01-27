@@ -46,7 +46,7 @@ public class CharacterController : MonoBehaviour
             children.GetComponent<TextMeshProUGUI>().text = "Children: " + amountOfChildren;
         }
 
-        TicketController.Instance.ReceiveMoney();
+        StartCoroutine(TicketController.Instance.ReceiveMoney());
     }
 
     public void CorrectedCurrency()
@@ -54,10 +54,6 @@ public class CharacterController : MonoBehaviour
         foreach (GameObject placedTickets in GameObject.FindGameObjectsWithTag("PlacedTicket"))
         {
             Destroy(placedTickets);
-        }
-        foreach (GameObject placedMoney in GameObject.FindGameObjectsWithTag("PlacedMoney"))
-        {
-            Destroy(placedMoney);
         }
         StartCoroutine(CustomerLeaves());
     }
