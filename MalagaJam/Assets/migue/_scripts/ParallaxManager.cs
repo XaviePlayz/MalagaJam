@@ -22,13 +22,13 @@ public class ParallaxManager : MonoBehaviour
 {
     // Define layer array
     public List<ParallaxLayer> parallaxLayers = new List<ParallaxLayer>();
-    private List<Transform> layerStartPos = new List<Transform>(); 
+    private List<Vector3> layerStartPos = new List<Vector3>(); 
 
     void Start()
     {
         foreach (var pLayer in parallaxLayers)
         {
-            layerStartPos.Add(pLayer.layerTrans);
+            layerStartPos.Add(pLayer.layerTrans.localPosition);
         }
     }
 
@@ -40,12 +40,11 @@ public class ParallaxManager : MonoBehaviour
         Vector2 displacement = new Vector2((screenPoint.x - halfWidth)/halfWidth , (screenPoint.y - halfHeight) / halfHeight);  
         // Move on the contrary direction to the mouse displacement
         displacement *= -1f;
-        
 
         int count = 0;
         foreach (var pLayer in parallaxLayers)
         {
-            pLayer.layerTrans.localPosition = layerStartPos[0].localPosition + new Vector3(displacement.x * pLayer.parallaxScale, displacement.y * pLayer.parallaxScale, 0);
+            pLayer.layerTrans.localPosition = layerStartPos[count] + new Vector3(displacement.x * pLayer.parallaxScale * 0.7f, displacement.y * pLayer.parallaxScale * 0.5f, 0);
             count = count + 1;
         }
     }
