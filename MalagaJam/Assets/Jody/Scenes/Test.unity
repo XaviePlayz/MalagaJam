@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 650538629}
   - component: {fileID: 650538630}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

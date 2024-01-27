@@ -12,6 +12,7 @@ TagManager:
   - 100
   - 500
   - 1000
+  - Counter
   layers:
   - Default
   - TransparentFX
