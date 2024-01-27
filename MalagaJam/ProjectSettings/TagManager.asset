@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Adults
   - Children
+  - NPC
   layers:
   - Default
   - TransparentFX

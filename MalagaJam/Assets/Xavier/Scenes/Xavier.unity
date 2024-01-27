@@ -483,7 +483,6 @@ MonoBehaviour:
   - {fileID: 6232169308448844608, guid: cadf0115508a6d74cbe8bfeb8de86cd5, type: 3}
   - {fileID: 6232169308448844608, guid: 2cc9c4cc4676b7a44b794d74ae39ecf5, type: 3}
   - {fileID: 6232169308448844608, guid: f67a48d242a5c244c9381e3d4afafe71, type: 3}
-  canvas: {fileID: 0}
   adults: {fileID: 0}
   children: {fileID: 0}
   amountOfAdults: 0
@@ -831,5 +830,5 @@ SceneRoots:
   - {fileID: 888327658}
   - {fileID: 844286685}
   - {fileID: 1429470304}
-  - {fileID: 1536802021}
   - {fileID: 1206497754}
+  - {fileID: 1536802021}
