@@ -9,7 +9,7 @@ public class DragAndDrop : MonoBehaviour
     Collider2D col;
 
     public GameObject ticketInventory;
-    public GameObject draggingTicket;
+    private GameObject draggingTicket;
     void Start()
     {
         col = GetComponent<Collider2D>();
@@ -62,13 +62,6 @@ public class DragAndDrop : MonoBehaviour
         {
             canMove = false;
             dragging = false;
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Counter"))
-        {
         }
     }
 }
