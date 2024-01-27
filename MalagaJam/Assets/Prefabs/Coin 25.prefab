@@ -99,7 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ticketInventory: {fileID: 0}
-  draggingTicket: {fileID: 0}
 --- !u!58 &7031159714653998132
 CircleCollider2D:
   m_ObjectHideFlags: 0

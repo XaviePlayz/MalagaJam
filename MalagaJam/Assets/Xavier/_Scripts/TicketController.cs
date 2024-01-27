@@ -37,7 +37,15 @@ public class TicketController : MonoBehaviour
     public GameObject Coin500;
     public GameObject Bill1000;
 
-    public Transform spawnLocation;
+    // the range of X
+    [Header("X Spawn Range")]
+    public float xMin;
+    public float xMax;
+
+    // the range of y
+    [Header("Y Spawn Range")]
+    public float yMin;
+    public float yMax;
 
     private int pricePerAdult = 250;
     private int pricePerChild = 150;
@@ -69,21 +77,27 @@ public class TicketController : MonoBehaviour
             int randomCoin500Amount = Random.Range(0, 10);
             int randomBill1000Amount = Random.Range(0, 5);
 
+
+
             for (int i = 0; i < randomCoin25Amount; i++)
             {
-                Instantiate(Coin25, spawnLocation);
+                Vector2 pos = new Vector2(Random.Range(xMin, xMax), Random.Range(yMin, yMax));
+                Instantiate(Coin25, pos, Quaternion.identity);
             }
             for (int i = 0; i < randomCoin100Amount; i++)
             {
-                Instantiate(Coin100, spawnLocation);
+                Vector2 pos = new Vector2(Random.Range(xMin, xMax), Random.Range(yMin, yMax));
+                Instantiate(Coin100, pos, Quaternion.identity);
             }
             for (int i = 0; i < randomCoin500Amount; i++)
             {
-                Instantiate(Coin500, spawnLocation);
+                Vector2 pos = new Vector2(Random.Range(xMin, xMax), Random.Range(yMin, yMax));
+                Instantiate(Coin500, pos, Quaternion.identity);
             }
             for (int i = 0; i < randomBill1000Amount; i++)
             {
-                Instantiate(Bill1000, spawnLocation);
+                Vector2 pos = new Vector2(Random.Range(xMin, xMax), Random.Range(yMin, yMax));
+                Instantiate(Bill1000, pos, Quaternion.identity);
             }
             receivedMoney = (randomCoin25Amount * 25) + (randomCoin100Amount * 100) + (randomCoin500Amount * 500) + (randomBill1000Amount * 1000);
         }
