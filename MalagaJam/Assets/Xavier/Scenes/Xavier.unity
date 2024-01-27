@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a9f41f3d7791d429a538fcc5ec8acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ticket: {fileID: 70386871}
+  ticketInventory: {fileID: 70386871}
   draggingTicket: {fileID: 0}
 --- !u!212 &70386873
 SpriteRenderer:
@@ -2002,7 +2002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a9f41f3d7791d429a538fcc5ec8acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ticket: {fileID: 1172350149}
+  ticketInventory: {fileID: 1172350149}
   draggingTicket: {fileID: 0}
 --- !u!212 &1172350151
 SpriteRenderer:

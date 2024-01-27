@@ -8,7 +8,7 @@ public class DragAndDrop : MonoBehaviour
     bool dragging;
     Collider2D col;
 
-    public GameObject ticket;
+    public GameObject ticketInventory;
     public GameObject draggingTicket;
     void Start()
     {
@@ -41,18 +41,34 @@ public class DragAndDrop : MonoBehaviour
         }
         if (dragging)
         {
-            if (draggingTicket == null)
+
+            if (ticketInventory != null)
             {
-                Instantiate(ticket);
-                draggingTicket = ticket;
-                draggingTicket.tag = "PlacedTicket";
+                if (draggingTicket == null)
+                {
+                    Instantiate(ticketInventory);
+                    draggingTicket = ticketInventory;
+                    draggingTicket.tag = "PlacedTicket";
+                }
+                draggingTicket.transform.position = mousePos;
             }
-            ticket.transform.position = mousePos;
+            else
+            {
+                this.transform.position = mousePos;
+            }
+
         }
         if (Input.GetMouseButtonUp(0))
         {
             canMove = false;
             dragging = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Counter"))
+        {
         }
     }
 }
