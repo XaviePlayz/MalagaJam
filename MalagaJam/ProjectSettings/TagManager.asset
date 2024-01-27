@@ -13,6 +13,7 @@ TagManager:
   - 500
   - 1000
   - Counter
+  - PlacedMoney
   layers:
   - Default
   - TransparentFX

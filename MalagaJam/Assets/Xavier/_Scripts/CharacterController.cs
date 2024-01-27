@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
 
 public class CharacterController : MonoBehaviour
 {
@@ -46,13 +45,19 @@ public class CharacterController : MonoBehaviour
             adults.GetComponent<TextMeshProUGUI>().text = "Adults: " + amountOfAdults;
             children.GetComponent<TextMeshProUGUI>().text = "Children: " + amountOfChildren;
         }
+
+        TicketController.Instance.ReceiveMoney();
     }
 
     public void CorrectedCurrency()
     {
-        foreach (GameObject draggedTickets in GameObject.FindGameObjectsWithTag("PlacedTicket"))
+        foreach (GameObject placedTickets in GameObject.FindGameObjectsWithTag("PlacedTicket"))
         {
-            Destroy(draggedTickets);
+            Destroy(placedTickets);
+        }
+        foreach (GameObject placedMoney in GameObject.FindGameObjectsWithTag("PlacedMoney"))
+        {
+            Destroy(placedMoney);
         }
         StartCoroutine(CustomerLeaves());
     }
