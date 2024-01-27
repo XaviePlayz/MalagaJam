@@ -7,6 +7,10 @@ TagManager:
   - Adults
   - Children
   - NPC
+  - 25
+  - 100
+  - 500
+  - 1000
   layers:
   - Default
   - TransparentFX
