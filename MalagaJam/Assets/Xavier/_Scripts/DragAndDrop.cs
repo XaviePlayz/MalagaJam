@@ -41,7 +41,6 @@ public class DragAndDrop : MonoBehaviour
         }
         if (dragging)
         {
-
             if (ticketInventory != null)
             {
                 if (draggingTicket == null)
@@ -50,13 +49,8 @@ public class DragAndDrop : MonoBehaviour
                     draggingTicket = ticketInventory;
                     draggingTicket.tag = "PlacedTicket";
                 }
-                draggingTicket.transform.position = mousePos;
             }
-            else
-            {
-                this.transform.position = mousePos;
-            }
-
+            this.transform.position = mousePos;
         }
         if (Input.GetMouseButtonUp(0))
         {
