@@ -50,6 +50,10 @@ public class CharacterController : MonoBehaviour
 
     public void CorrectedCurrency()
     {
+        foreach (GameObject draggedTickets in GameObject.FindGameObjectsWithTag("PlacedTicket"))
+        {
+            Destroy(draggedTickets);
+        }
         StartCoroutine(CustomerLeaves());
     }
 
