@@ -7,10 +7,7 @@ TagManager:
   - Adults
   - Children
   - NPC
-  - 25
-  - 100
-  - 500
-  - 1000
+  - PlacedTicket
   layers:
   - Default
   - TransparentFX

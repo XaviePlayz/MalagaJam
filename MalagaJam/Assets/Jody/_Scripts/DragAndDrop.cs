@@ -7,6 +7,9 @@ public class DragAndDrop : MonoBehaviour
     bool canMove;
     bool dragging;
     Collider2D col;
+
+    public GameObject ticket;
+    public GameObject draggingTicket;
     void Start()
     {
         col = GetComponent<Collider2D>();
@@ -38,7 +41,13 @@ public class DragAndDrop : MonoBehaviour
         }
         if (dragging)
         {
-            this.transform.position = mousePos;
+            if (draggingTicket == null)
+            {
+                Instantiate(ticket);
+                draggingTicket = ticket;
+                draggingTicket.tag = "PlacedTicket";
+            }
+            ticket.transform.position = mousePos;
         }
         if (Input.GetMouseButtonUp(0))
         {
