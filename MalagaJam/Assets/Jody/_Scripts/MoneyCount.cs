@@ -7,9 +7,17 @@ public class MoneyCount : MonoBehaviour
     private int TotalMoney;
     
     List<GameObject> Coins25 = new List<GameObject>();
+    public Sprite placed25;
+    public Sprite unplaced25;
     List<GameObject> Coins100 = new List<GameObject>();
+    public Sprite placed100;
+    public Sprite unplaced100;
     List<GameObject> Coins500 = new List<GameObject>();
+    public Sprite placed500;
+    public Sprite unplaced500;
     List<GameObject> Bills1000 = new List<GameObject>();
+    public Sprite placed1000;
+    public Sprite unplaced1000;
 
     void Start()
     {
@@ -47,24 +55,51 @@ public class MoneyCount : MonoBehaviour
         { 
             TotalMoney+=25;
             Debug.Log("+25, total " + TotalMoney); 
+            other.GetComponent<SpriteRenderer>().sprite = placed25;
         }         
         
         else if (other.gameObject.CompareTag("100")) 
         { 
             TotalMoney+=100;
             Debug.Log("+100, total " + TotalMoney); 
+            other.GetComponent<SpriteRenderer>().sprite = placed100;
         }          
         
         else if (other.gameObject.CompareTag("500")) 
         { 
             TotalMoney+=500;
             Debug.Log("+500, total " + TotalMoney); 
+            other.GetComponent<SpriteRenderer>().sprite = placed500;
         }          
         
         else if (other.gameObject.CompareTag("1000")) 
         { 
             TotalMoney+=1000;
             Debug.Log("+1000, total " + TotalMoney); 
+            other.GetComponent<SpriteRenderer>().sprite = placed1000;
+        } 
+    }
+    
+    public void OnTriggerExit2D(Collider2D other) 
+    {
+        if (other.gameObject.CompareTag("25")) 
+        { 
+            other.GetComponent<SpriteRenderer>().sprite = unplaced25;
+        }         
+        
+        else if (other.gameObject.CompareTag("100")) 
+        { 
+            other.GetComponent<SpriteRenderer>().sprite = unplaced100;
+        }          
+        
+        else if (other.gameObject.CompareTag("500")) 
+        { 
+            other.GetComponent<SpriteRenderer>().sprite = unplaced500;
+        }          
+        
+        else if (other.gameObject.CompareTag("1000")) 
+        { 
+            other.GetComponent<SpriteRenderer>().sprite = unplaced1000;
         } 
     }
 }
