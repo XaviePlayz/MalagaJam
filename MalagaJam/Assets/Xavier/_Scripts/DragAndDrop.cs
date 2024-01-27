@@ -10,6 +10,7 @@ public class DragAndDrop : MonoBehaviour
 
     public GameObject ticketInventory;
     private GameObject draggingTicket;
+    private Vector3 offset = new Vector3(0, 0, -5);
     void Start()
     {
         col = GetComponent<Collider2D>();
@@ -20,7 +21,7 @@ public class DragAndDrop : MonoBehaviour
      // Update is called once per frame
     void Update()
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -43,14 +44,25 @@ public class DragAndDrop : MonoBehaviour
         {
             if (ticketInventory != null)
             {
-                if (draggingTicket == null)
+                if (draggingTicket == null && gameObject.CompareTag("AdultTickets"))
                 {
                     Instantiate(ticketInventory);
                     draggingTicket = ticketInventory;
-                    draggingTicket.tag = "PlacedTicket";
+                    draggingTicket.tag = "PlacedAdultTickets";
                 }
+                else if (draggingTicket == null && gameObject.CompareTag("ChildrenTickets"))
+                {
+                    Instantiate(ticketInventory);
+                    draggingTicket = ticketInventory;
+                    draggingTicket.tag = "PlacedChildrenTickets";
+                }
+                draggingTicket.transform.position = mousePos - offset;
             }
-            this.transform.position = mousePos;
+            else
+            {
+                this.transform.position = mousePos - offset;
+            }
+
         }
         if (Input.GetMouseButtonUp(0))
         {

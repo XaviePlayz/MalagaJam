@@ -28,6 +28,7 @@ public class TicketController : MonoBehaviour
     }
 
     #endregion
+
     [Header("NPC")]
     private CharacterController characterController;
     private CurrencyController currencyController;
@@ -52,8 +53,6 @@ public class TicketController : MonoBehaviour
 
     [SerializeField] private int totalTicketPrice;
     [SerializeField] private int receivedMoney;
-
-
     void Start()
     {
         characterController = FindObjectOfType<CharacterController>();
@@ -66,37 +65,42 @@ public class TicketController : MonoBehaviour
         {
             totalTicketPrice = (pricePerAdult * characterController.amountOfAdults) + (pricePerChild * characterController.amountOfChildren);
         }
-    }
+    }  
 
-    public void ReceiveMoney()
+    public IEnumerator ReceiveMoney()
     {
-        while (receivedMoney <= totalTicketPrice)
+        List<GameObject> givenMoneyList = new List<GameObject>();
+        yield return new WaitForSeconds(2);
+        while (receivedMoney < totalTicketPrice)
         {
             int randomCoin25Amount = Random.Range(0, 4);
+            Debug.Log(randomCoin25Amount);
             int randomCoin100Amount = Random.Range(0, 3);
+            Debug.Log(randomCoin100Amount);
             int randomCoin500Amount = Random.Range(0, 2);
+            Debug.Log(randomCoin500Amount);
             int randomBill1000Amount = Random.Range(0, 1);
+            Debug.Log(randomBill1000Amount);
 
             for (int i = 0; i < randomCoin25Amount; i++)
             {
-                Vector2 pos = new Vector2(Random.Range(xMin, xMax), Random.Range(yMin, yMax));
+                Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
                 Instantiate(Coin25, pos, Quaternion.identity);
-                Coin25.tag = "PlacedMoney";
-
+                receivedMoney += 25;
             }
             for (int i = 0; i < randomCoin100Amount; i++)
             {
-                Vector2 pos = new Vector2(Random.Range(xMin, xMax), Random.Range(yMin, yMax));
+                Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
                 Instantiate(Coin100, pos, Quaternion.identity);
-                Coin100.tag = "PlacedMoney";
+                receivedMoney += 100;
             }
             for (int i = 0; i < randomCoin500Amount; i++)
             {
                 if (totalTicketPrice > 500)
                 {
-                    Vector2 pos = new Vector2(Random.Range(xMin, xMax), Random.Range(yMin, yMax));
+                    Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
                     Instantiate(Coin500, pos, Quaternion.identity);
-                    Coin500.tag = "PlacedMoney";
+                    receivedMoney += 500;
                 }
                 else
                 {
@@ -107,16 +111,15 @@ public class TicketController : MonoBehaviour
             {
                 if (totalTicketPrice > 1000)
                 {
-                    Vector2 pos = new Vector2(Random.Range(xMin, xMax), Random.Range(yMin, yMax));
+                    Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
                     Instantiate(Bill1000, pos, Quaternion.identity);
-                    Bill1000.tag = "PlacedMoney";
+                    receivedMoney += 1000;
                 }
                 else
                 {
                     randomBill1000Amount = 0;
                 }
             }
-            receivedMoney = (randomCoin25Amount * 25) + (randomCoin100Amount * 100) + (randomCoin500Amount * 500) + (randomBill1000Amount * 1000);
         }
     }
 }

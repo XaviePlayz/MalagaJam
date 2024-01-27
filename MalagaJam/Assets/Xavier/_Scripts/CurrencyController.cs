@@ -18,6 +18,8 @@ public class CurrencyController : MonoBehaviour
     List<GameObject> Bills1000 = new List<GameObject>();
     public Sprite placed1000;
     public Sprite unplaced1000;
+    private int totalAdultTickets;
+    private int totalChildrentickets;
 
     void Start()
     {
@@ -77,7 +79,16 @@ public class CurrencyController : MonoBehaviour
             TotalMoney+=1000;
             Debug.Log("+1000, total " + TotalMoney); 
             other.GetComponent<SpriteRenderer>().sprite = placed1000;
-        } 
+        }
+
+        if (other.gameObject.CompareTag("PlacedAdultTickets"))
+        {
+            totalAdultTickets +=1;
+        }
+        else if (other.gameObject.CompareTag("PlacedChildrenTickets"))
+        {
+            totalChildrentickets +=1;
+        }
     }
     
     public void OnTriggerExit2D(Collider2D other) 
@@ -100,6 +111,14 @@ public class CurrencyController : MonoBehaviour
         else if (other.gameObject.CompareTag("1000")) 
         { 
             other.GetComponent<SpriteRenderer>().sprite = unplaced1000;
-        } 
+        }
+        if (other.gameObject.CompareTag("PlacedAdultTickets"))
+        {
+            totalAdultTickets -= 1;
+        }
+        else if (other.gameObject.CompareTag("PlacedChildrenTickets"))
+        {
+            totalChildrentickets -= 1;
+        }
     }
 }
