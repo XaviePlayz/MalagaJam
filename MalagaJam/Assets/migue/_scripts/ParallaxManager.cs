@@ -24,7 +24,6 @@ public class ParallaxManager : MonoBehaviour
     public List<ParallaxLayer> parallaxLayers = new List<ParallaxLayer>();
     private List<Transform> layerStartPos = new List<Transform>(); 
 
-    // Start is called before the first frame update
     void Start()
     {
         foreach (var pLayer in parallaxLayers)
@@ -33,7 +32,6 @@ public class ParallaxManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         var screenPoint = Input.mousePosition;
