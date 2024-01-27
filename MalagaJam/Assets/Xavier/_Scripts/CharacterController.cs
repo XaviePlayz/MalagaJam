@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
 
 public class CharacterController : MonoBehaviour
 {
@@ -46,6 +45,8 @@ public class CharacterController : MonoBehaviour
             adults.GetComponent<TextMeshProUGUI>().text = "Adults: " + amountOfAdults;
             children.GetComponent<TextMeshProUGUI>().text = "Children: " + amountOfChildren;
         }
+
+        TicketController.Instance.ReceiveMoney();
     }
 
     public void CorrectedCurrency()

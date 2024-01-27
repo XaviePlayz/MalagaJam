@@ -381,6 +381,7 @@ Transform:
   m_Children:
   - {fileID: 117924098}
   - {fileID: 2018762103}
+  - {fileID: 621586660}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &65015828
@@ -452,6 +453,37 @@ MonoBehaviour:
   children: {fileID: 0}
   amountOfAdults: 0
   amountOfChildren: 0
+--- !u!1 &239784219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 239784220}
+  m_Layer: 0
+  m_Name: MoneySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &239784220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239784219}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.05, y: -2.37, z: -0.0822236}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &292457419
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,6 +1042,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &621586659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 621586660}
+  - component: {fileID: 621586661}
+  m_Layer: 0
+  m_Name: TicketController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &621586660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621586659}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 65015827}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &621586661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621586659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7dae96cc726b1245aca08504688dc97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Coin25: {fileID: 1501745297869391016, guid: df79cee3708d08042bbc098445b9c810, type: 3}
+  Coin100: {fileID: 9009069373352872932, guid: c6845c390c423384a86c6591aaf20068, type: 3}
+  Coin500: {fileID: 185961142736264036, guid: a57eca285794c8d478c3ee11c8848fd2, type: 3}
+  Bill1000: {fileID: 4207991191075597495, guid: ce21ba9afa7557c4d832f09010fa0c1d, type: 3}
+  spawnLocation: {fileID: 239784220}
 --- !u!1 &640776606
 GameObject:
   m_ObjectHideFlags: 0
@@ -2530,6 +2611,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3711e9dd98fea4c9e6957cdc1138de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  placed25: {fileID: 0}
+  unplaced25: {fileID: 0}
+  placed100: {fileID: 0}
+  unplaced100: {fileID: 0}
+  placed500: {fileID: 0}
+  unplaced500: {fileID: 0}
+  placed1000: {fileID: 0}
+  unplaced1000: {fileID: 0}
 --- !u!50 &1462882889
 Rigidbody2D:
   serializedVersion: 4
@@ -3936,3 +4025,4 @@ SceneRoots:
   - {fileID: 13163060}
   - {fileID: 1883540619}
   - {fileID: 1552790855}
+  - {fileID: 239784220}
