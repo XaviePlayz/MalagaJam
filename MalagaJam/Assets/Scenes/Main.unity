@@ -3274,6 +3274,30 @@ PrefabInstance:
       propertyPath: bellPart
       value: 
       objectReference: {fileID: 1136869236}
+    - target: {fileID: 4032317457522339593, guid: 63d373b749cf8904d80f297844640dce, type: 3}
+      propertyPath: allAvailableNPCs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032317457522339593, guid: 63d373b749cf8904d80f297844640dce, type: 3}
+      propertyPath: allAvailableNPCs.Array.data[0]
+      value: 
+      objectReference: {fileID: 6232169308448844608, guid: 8804987e0c18c0d4280efef7993a8c8a, type: 3}
+    - target: {fileID: 4032317457522339593, guid: 63d373b749cf8904d80f297844640dce, type: 3}
+      propertyPath: allAvailableNPCs.Array.data[1]
+      value: 
+      objectReference: {fileID: 6232169308448844608, guid: de061491164f3d145b98b1992f3a2113, type: 3}
+    - target: {fileID: 4032317457522339593, guid: 63d373b749cf8904d80f297844640dce, type: 3}
+      propertyPath: allAvailableNPCs.Array.data[2]
+      value: 
+      objectReference: {fileID: 6232169308448844608, guid: cadf0115508a6d74cbe8bfeb8de86cd5, type: 3}
+    - target: {fileID: 4032317457522339593, guid: 63d373b749cf8904d80f297844640dce, type: 3}
+      propertyPath: allAvailableNPCs.Array.data[3]
+      value: 
+      objectReference: {fileID: 6232169308448844608, guid: 2cc9c4cc4676b7a44b794d74ae39ecf5, type: 3}
+    - target: {fileID: 4032317457522339593, guid: 63d373b749cf8904d80f297844640dce, type: 3}
+      propertyPath: allAvailableNPCs.Array.data[4]
+      value: 
+      objectReference: {fileID: 6232169308448844608, guid: f67a48d242a5c244c9381e3d4afafe71, type: 3}
     - target: {fileID: 4111586966554671482, guid: 63d373b749cf8904d80f297844640dce, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
