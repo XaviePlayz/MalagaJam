@@ -416,6 +416,22 @@ PrefabInstance:
       propertyPath: pLayer
       value: 
       objectReference: {fileID: 1188189940}
+    - target: {fileID: 2391022905555557893, guid: d836aa3fc2a40e94e8295b04c2067ab6, type: 3}
+      propertyPath: AdultTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: fade47de447dee446bb0fa3a354f10d0, type: 3}
+    - target: {fileID: 2391022905555557893, guid: d836aa3fc2a40e94e8295b04c2067ab6, type: 3}
+      propertyPath: ChildrenTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: 4f8812a619dd9b244aa52ecd4d8cd90e, type: 3}
+    - target: {fileID: 2391022905555557893, guid: d836aa3fc2a40e94e8295b04c2067ab6, type: 3}
+      propertyPath: PlacedAdultTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: b581b89a2e7c8f746b340843654b89c9, type: 3}
+    - target: {fileID: 2391022905555557893, guid: d836aa3fc2a40e94e8295b04c2067ab6, type: 3}
+      propertyPath: PlacedChildrenTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: cfe58562037bcb64f9297765abe7d2bf, type: 3}
     - target: {fileID: 3836970904843514251, guid: d836aa3fc2a40e94e8295b04c2067ab6, type: 3}
       propertyPath: m_Name
       value: texture_TicketKid
@@ -1486,6 +1502,22 @@ PrefabInstance:
       propertyPath: pLayer
       value: 
       objectReference: {fileID: 1188189940}
+    - target: {fileID: 1030949428311378013, guid: 9af4c5540045a8e44b4c99403ce261dd, type: 3}
+      propertyPath: AdultTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: fade47de447dee446bb0fa3a354f10d0, type: 3}
+    - target: {fileID: 1030949428311378013, guid: 9af4c5540045a8e44b4c99403ce261dd, type: 3}
+      propertyPath: ChildrenTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: 4f8812a619dd9b244aa52ecd4d8cd90e, type: 3}
+    - target: {fileID: 1030949428311378013, guid: 9af4c5540045a8e44b4c99403ce261dd, type: 3}
+      propertyPath: PlacedAdultTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: b581b89a2e7c8f746b340843654b89c9, type: 3}
+    - target: {fileID: 1030949428311378013, guid: 9af4c5540045a8e44b4c99403ce261dd, type: 3}
+      propertyPath: PlacedChildrenTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: cfe58562037bcb64f9297765abe7d2bf, type: 3}
     - target: {fileID: 6827971938038237487, guid: 9af4c5540045a8e44b4c99403ce261dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.09
@@ -5521,9 +5553,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 276606154}
     - target: {fileID: 5189563906230827882, guid: e7669f2b7ef2e98458e9c390cc706dc1, type: 3}
+      propertyPath: AdultTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: fade47de447dee446bb0fa3a354f10d0, type: 3}
+    - target: {fileID: 5189563906230827882, guid: e7669f2b7ef2e98458e9c390cc706dc1, type: 3}
+      propertyPath: ChildrenTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: 4f8812a619dd9b244aa52ecd4d8cd90e, type: 3}
+    - target: {fileID: 5189563906230827882, guid: e7669f2b7ef2e98458e9c390cc706dc1, type: 3}
       propertyPath: ticketInventory
       value: 
       objectReference: {fileID: 1754835674}
+    - target: {fileID: 5189563906230827882, guid: e7669f2b7ef2e98458e9c390cc706dc1, type: 3}
+      propertyPath: PlacedAdultTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: b581b89a2e7c8f746b340843654b89c9, type: 3}
+    - target: {fileID: 5189563906230827882, guid: e7669f2b7ef2e98458e9c390cc706dc1, type: 3}
+      propertyPath: PlacedChildrenTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: cfe58562037bcb64f9297765abe7d2bf, type: 3}
     - target: {fileID: 9048828968395577084, guid: e7669f2b7ef2e98458e9c390cc706dc1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.38
@@ -5586,9 +5634,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 790599673}
     - target: {fileID: 401731761717102801, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
+      propertyPath: AdultTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: fade47de447dee446bb0fa3a354f10d0, type: 3}
+    - target: {fileID: 401731761717102801, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
+      propertyPath: ChildrenTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: 4f8812a619dd9b244aa52ecd4d8cd90e, type: 3}
+    - target: {fileID: 401731761717102801, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
       propertyPath: ticketInventory
       value: 
       objectReference: {fileID: 948401046}
+    - target: {fileID: 401731761717102801, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
+      propertyPath: PlacedAdultTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: b581b89a2e7c8f746b340843654b89c9, type: 3}
+    - target: {fileID: 401731761717102801, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
+      propertyPath: PlacedChildrenTickets
+      value: 
+      objectReference: {fileID: 21300000, guid: cfe58562037bcb64f9297765abe7d2bf, type: 3}
     - target: {fileID: 1361613461066458570, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
       propertyPath: m_Name
       value: texture_TicketBoxKid
