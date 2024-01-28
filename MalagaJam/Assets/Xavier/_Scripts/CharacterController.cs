@@ -33,7 +33,7 @@ public class CharacterController : MonoBehaviour
     {
         currentNPC = allAvailableNPCs[Random.Range(0, allAvailableNPCs.Length)];
 
-        var player =  Instantiate(currentNPC);
+        var player = Instantiate(currentNPC);
         player.transform.parent = pLayer;
 
         destroyPreviousNPC = GameObject.FindGameObjectWithTag("NPC");
