@@ -75,8 +75,8 @@ public class TicketController : MonoBehaviour
 
     public ParallaxManager pm;
 
-    [SerializeField] private int totalTicketPrice;
-    [SerializeField] private int receivedMoney;
+    [SerializeField] public int totalTicketPrice;
+    [SerializeField] public int receivedMoney;
     void Start()
     {
         characterController = FindObjectOfType<CharacterController>();
