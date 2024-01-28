@@ -102,6 +102,10 @@ MonoBehaviour:
   ticket: {fileID: 0}
   draggingTicket: {fileID: 0}
   pLayer: {fileID: 0}
+  PlacedAdultTickets: {fileID: 21300000, guid: b581b89a2e7c8f746b340843654b89c9, type: 3}
+  PlacedChildrenTickets: {fileID: 21300000, guid: cfe58562037bcb64f9297765abe7d2bf, type: 3}
+  AdultTickets: {fileID: 21300000, guid: fade47de447dee446bb0fa3a354f10d0, type: 3}
+  ChildrenTickets: {fileID: 21300000, guid: 4f8812a619dd9b244aa52ecd4d8cd90e, type: 3}
 --- !u!61 &6160982896638849325
 BoxCollider2D:
   m_ObjectHideFlags: 0

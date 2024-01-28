@@ -16,6 +16,11 @@ public class DragAndDrop : MonoBehaviour
     // Parallax layer for the Tickets
     [Header("Parllax Layer Transform")]
     public Transform pLayer;
+
+    public Sprite PlacedAdultTickets;
+    public Sprite PlacedChildrenTickets;
+    public Sprite AdultTickets;
+    public Sprite ChildrenTickets;
     void Start()
     {
         col = GetComponent<Collider2D>();
@@ -85,10 +90,13 @@ public class DragAndDrop : MonoBehaviour
         if (other.gameObject.CompareTag("Counter") && gameObject.CompareTag("AdultTickets"))
         {
             ticket.tag = "PlacedAdultTickets";
+            ticket.GetComponent<SpriteRenderer>().sprite = PlacedAdultTickets;
+
         }
         else if (other.gameObject.CompareTag("Counter") && gameObject.CompareTag("ChildrenTickets"))
         {
             ticket.tag = "PlacedChildrenTickets";
+            ticket.GetComponent<SpriteRenderer>().sprite = PlacedChildrenTickets;
         }
     }
 
@@ -97,10 +105,12 @@ public class DragAndDrop : MonoBehaviour
         if (other.gameObject.CompareTag("Counter") && gameObject.CompareTag("PlacedAdultTickets"))
         {
             ticket.tag = "AdultTickets";
+            ticket.GetComponent<SpriteRenderer>().sprite = AdultTickets;
         }
         else if (other.gameObject.CompareTag("Counter") && gameObject.CompareTag("PlacedChildrenTickets"))
         {
             ticket.tag = "ChildrenTickets";
+            ticket.GetComponent<SpriteRenderer>().sprite = ChildrenTickets;
         }
     }
 }
