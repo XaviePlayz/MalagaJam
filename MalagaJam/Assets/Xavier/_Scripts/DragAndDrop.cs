@@ -9,8 +9,13 @@ public class DragAndDrop : MonoBehaviour
     Collider2D col;
 
     public GameObject ticketInventory;
-    private GameObject draggingTicket;
+    public GameObject ticket;
+    [SerializeField] private GameObject draggingTicket;
     private Vector3 offset = new Vector3(0, 0, -5);
+
+    // Parallax layer for the Tickets
+    [Header("Parllax Layer Transform")]
+    public Transform pLayer;
     void Start()
     {
         col = GetComponent<Collider2D>();
@@ -46,17 +51,17 @@ public class DragAndDrop : MonoBehaviour
             {
                 if (draggingTicket == null && gameObject.CompareTag("AdultTickets"))
                 {
-                    Instantiate(ticketInventory);
-                    draggingTicket = ticketInventory;
-                    draggingTicket.tag = "PlacedAdultTickets";
+                    var instantiatedTicket = Instantiate(ticket);
+                    instantiatedTicket.transform.parent = pLayer;
+                    draggingTicket = ticket;
                 }
                 else if (draggingTicket == null && gameObject.CompareTag("ChildrenTickets"))
                 {
-                    Instantiate(ticketInventory);
-                    draggingTicket = ticketInventory;
-                    draggingTicket.tag = "PlacedChildrenTickets";
+                    var instantiatedTicket = Instantiate(ticket);
+                    instantiatedTicket.transform.parent = pLayer;
+                    draggingTicket = ticket;
                 }
-                draggingTicket.transform.position = mousePos - offset;
+                ticket.transform.position = mousePos - offset;
             }
             else
             {
@@ -64,10 +69,25 @@ public class DragAndDrop : MonoBehaviour
             }
 
         }
+        else
+        {
+            draggingTicket = null;
+        }
         if (Input.GetMouseButtonUp(0))
         {
             canMove = false;
             dragging = false;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Counter") && gameObject.CompareTag("AdultTickets"))
+        {
+            ticket.tag = "PlacedAdultTickets";
+        }
+        else if (other.gameObject.CompareTag("Counter") && gameObject.CompareTag("ChildrenTickets"))
+        {
+            ticket.tag = "PlacedChildrenTickets";
         }
     }
 }
