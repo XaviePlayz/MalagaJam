@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
     public void StartButton()
     {
         SceneManager.LoadScene(1);
+        Time.timeScale = 1f; // Set time scale back to 1 to resume the game
     }
     public void Credits()
     {
