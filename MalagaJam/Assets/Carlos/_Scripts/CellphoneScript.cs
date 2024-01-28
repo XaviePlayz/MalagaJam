@@ -66,7 +66,7 @@ public class CellPhoneScript : MonoBehaviour, IPointerClickHandler
         if (messageList.Count > messageCount)
         {
             StartCoroutine(Tremble());
-            if (messageGOList.Count == 4) {
+            if (messageGOList.Count == 3) {
                 Destroy(messageGOList[0]);
                 messageGOList.RemoveAt(0);
             }

@@ -148,7 +148,7 @@ public class TicketController : MonoBehaviour
 
         float rCoinCalc = Random.Range(0f, 1f);
         Debug.Log(rCoinCalc);
-        if (rCoinCalc > 0.5f)
+        if (rCoinCalc < 0.15f)
         {
             Debug.Log("New coin method");
             CoinGiveWrapper cw = CalculateCoinNew(totalTicketPrice);

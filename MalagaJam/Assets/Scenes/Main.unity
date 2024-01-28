@@ -2702,7 +2702,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4009,7 +4009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530a354feed1fd64d8fb04fc5b28cb58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTimeSeconds: 240
+  totalTimeSeconds: 180
 --- !u!4 &1068193272 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6988721450896255474, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
@@ -8048,6 +8048,14 @@ PrefabInstance:
     - target: {fileID: 3487115577343577498, guid: cc605a5b3fc9c174a9901cf7ed8c3399, type: 3}
       propertyPath: m_VertexColorAlwaysGammaSpace
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4213329599624126661, guid: cc605a5b3fc9c174a9901cf7ed8c3399, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 166.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 4213329599624126661, guid: cc605a5b3fc9c174a9901cf7ed8c3399, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 296.3
       objectReference: {fileID: 0}
     - target: {fileID: 4213329599624126661, guid: cc605a5b3fc9c174a9901cf7ed8c3399, type: 3}
       propertyPath: m_AnchoredPosition.y

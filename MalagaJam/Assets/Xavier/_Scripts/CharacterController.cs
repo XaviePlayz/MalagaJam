@@ -56,8 +56,8 @@ public class CharacterController : MonoBehaviour
         children = GameObject.FindGameObjectWithTag("Children");
         anim = GameObject.FindAnyObjectByType<Animator>();
 
-        amountOfAdults = Random.Range(1, 4);
-        amountOfChildren = Random.Range(1, 4);
+        amountOfAdults = Random.Range(1, 5);
+        amountOfChildren = Random.Range(1, 5);
 
         if (adults != null && children != null)
         {
