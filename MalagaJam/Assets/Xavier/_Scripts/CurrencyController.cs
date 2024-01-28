@@ -48,7 +48,6 @@ public class CurrencyController : MonoBehaviour
 			Bills1000.Add(Bill1000);
 		}
         TotalMoney = (Coins25.Count * 25) + (Coins100.Count * 100) + (Coins500.Count * 500) + (Bills1000.Count * 1000);
-        Debug.Log(TotalMoney);
     }
 
     public void OnTriggerEnter2D(Collider2D other) 

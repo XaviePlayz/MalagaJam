@@ -22,7 +22,9 @@ public class ParallaxManager : MonoBehaviour
 {
     // Define layer array
     public List<ParallaxLayer> parallaxLayers = new List<ParallaxLayer>();
-    private List<Vector3> layerStartPos = new List<Vector3>(); 
+    private List<Vector3> layerStartPos = new List<Vector3>();
+
+    public Vector2 frontlayerParallax;
 
     void Start()
     {
@@ -44,7 +46,16 @@ public class ParallaxManager : MonoBehaviour
         int count = 0;
         foreach (var pLayer in parallaxLayers)
         {
+            if (count == 1)
+            {
+                frontlayerParallax = pLayer.layerTrans.localPosition;
+            }
             pLayer.layerTrans.localPosition = layerStartPos[count] + new Vector3(displacement.x * pLayer.parallaxScale * 0.7f, displacement.y * pLayer.parallaxScale * 0.5f, 0);
+            if (count == 1)
+            {
+                Vector3 aux = new Vector3(displacement.x * pLayer.parallaxScale * 0.7f, displacement.y * pLayer.parallaxScale * 0.5f, 0);
+                frontlayerParallax = new Vector2(aux.x, aux.y) ;
+            }
             count = count + 1;
         }
     }
