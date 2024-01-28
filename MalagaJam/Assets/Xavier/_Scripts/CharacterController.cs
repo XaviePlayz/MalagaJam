@@ -96,6 +96,7 @@ public class CharacterController : MonoBehaviour
 
     public void CorrectedCurrency()
     {
+        Debug.Log("buttonpress");
         CheckTicketsLogic();
         foreach (GameObject placedTickets in GameObject.FindGameObjectsWithTag("PlacedAdultTickets"))
         {
