@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class CharacterController : MonoBehaviour
 {
     public GameObject currentNPC;
+    public bool isHelping;
     public GameObject destroyPreviousNPC;
     public GameObject bell;
     public GameObject bellPart;
@@ -46,7 +47,7 @@ public class CharacterController : MonoBehaviour
     private void SendNextCharacter()
     {
         currentNPC = allAvailableNPCs[Random.Range(0, allAvailableNPCs.Length)];
-
+        isHelping = true;
         var player = Instantiate(currentNPC);
         player.transform.parent = pLayer;
 
@@ -119,26 +120,29 @@ public class CharacterController : MonoBehaviour
     }
     public void CorrectedCurrency(BaseEventData eventData)
     {
-        StartCoroutine(PressedBell());
-        CheckTicketsLogic();
-        foreach (GameObject placedTickets in GameObject.FindGameObjectsWithTag("PlacedAdultTickets"))
+        if (isHelping)
         {
-            Destroy(placedTickets);
-        }
-        foreach (GameObject placedTickets in GameObject.FindGameObjectsWithTag("PlacedChildrenTickets"))
-        {
-            Destroy(placedTickets);
-        }
+            StartCoroutine(PressedBell());
+            CheckTicketsLogic();
+            foreach (GameObject placedTickets in GameObject.FindGameObjectsWithTag("PlacedAdultTickets"))
+            {
+                Destroy(placedTickets);
+            }
+            foreach (GameObject placedTickets in GameObject.FindGameObjectsWithTag("PlacedChildrenTickets"))
+            {
+                Destroy(placedTickets);
+            }
 
-        List<GameObject> temporary = new List<GameObject>(CurrencyController.Instance.coinsInCounter);
-        foreach (GameObject coin in temporary)
-        {
-            Destroy(coin);
-        }
-        CurrencyController.Instance.totalAdultTickets = 0;
-        CurrencyController.Instance.totalChildrentickets = 0;
-        TicketController.Instance.receivedMoney = 0;
-        StartCoroutine(CustomerLeaves());
+            List<GameObject> temporary = new List<GameObject>(CurrencyController.Instance.coinsInCounter);
+            foreach (GameObject coin in temporary)
+            {
+                Destroy(coin);
+            }
+            CurrencyController.Instance.totalAdultTickets = 0;
+            CurrencyController.Instance.totalChildrentickets = 0;
+            TicketController.Instance.receivedMoney = 0;
+            StartCoroutine(CustomerLeaves());
+        }       
     }
 
     public IEnumerator PressedBell()
@@ -151,6 +155,7 @@ public class CharacterController : MonoBehaviour
 
     public IEnumerator CustomerLeaves()
     {
+        isHelping = false;
         anim.SetTrigger(leavingAnimationTrigger);
         yield return new WaitForSeconds(3);
       
