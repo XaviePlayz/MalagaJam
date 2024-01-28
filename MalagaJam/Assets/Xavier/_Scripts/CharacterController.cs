@@ -26,9 +26,12 @@ public class CharacterController : MonoBehaviour
     [Header("ParallaxLayer")]
     [SerializeField] private Transform pLayer;
 
+    public GameObject popUp;
+
     void Start()
     {
         SendNextCharacter();
+        popUp = GameObject.Find("PopUp");
     }
 
 
@@ -71,28 +74,42 @@ public class CharacterController : MonoBehaviour
         if (adultTickets == amountOfAdults && childrenTickets == amountOfChildren) { 
             if (moneyOnSurface > moneyShouldBeLeft) {
                 Debug.Log("You left more money than needed");
-                return 2;
+                StartCoroutine(PopUpReaction(3));
             }
             else if (moneyOnSurface == moneyShouldBeLeft)
             {
                 Debug.Log("Perfect");
-                return 1;
+                StartCoroutine(PopUpReaction(2));
+
             }
             else if (moneyOnSurface < moneyShouldBeLeft)
             {
                 Debug.Log("ClientIsMad");
-                return 0;
+                StartCoroutine(PopUpReaction(1));
             }
         }
         else
         {
             Debug.Log("NotEnoughTickets");
-            return -1;
+            StartCoroutine(PopUpReaction(0));
         }
 
         return -2;
 
     }
+
+    IEnumerator PopUpReaction(int reactionNumber)
+    {
+
+        popUp.GetComponent<Transform>().GetChild(reactionNumber).gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+
+        popUp.GetComponent<Transform>().GetChild(reactionNumber).gameObject.SetActive(false);
+
+
+    }
+
 
     public void CorrectedCurrency()
     {
