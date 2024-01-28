@@ -457,6 +457,7 @@ MonoBehaviour:
     parallaxScale: 0.1
   - layerTrans: {fileID: 292279249}
     parallaxScale: 0.1
+  frontlayerParallax: {x: 0, y: 0}
 --- !u!4 &283562058
 Transform:
   m_ObjectHideFlags: 0
@@ -1114,6 +1115,10 @@ PrefabInstance:
       propertyPath: pauseMenuUI
       value: 
       objectReference: {fileID: 1522846237}
+    - target: {fileID: 4032317457522339593, guid: 63d373b749cf8904d80f297844640dce, type: 3}
+      propertyPath: pLayer
+      value: 
+      objectReference: {fileID: 1188189940}
     - target: {fileID: 4111586966554671482, guid: 63d373b749cf8904d80f297844640dce, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1159,6 +1164,10 @@ PrefabInstance:
       value: Managers
       objectReference: {fileID: 0}
     - target: {fileID: 7182186633444235745, guid: 63d373b749cf8904d80f297844640dce, type: 3}
+      propertyPath: pm
+      value: 
+      objectReference: {fileID: 283562057}
+    - target: {fileID: 7182186633444235745, guid: 63d373b749cf8904d80f297844640dce, type: 3}
       propertyPath: xMax
       value: 3.5
       objectReference: {fileID: 0}
@@ -1168,11 +1177,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7182186633444235745, guid: 63d373b749cf8904d80f297844640dce, type: 3}
       propertyPath: yMax
-      value: -2.1
+      value: -1.6
       objectReference: {fileID: 0}
     - target: {fileID: 7182186633444235745, guid: 63d373b749cf8904d80f297844640dce, type: 3}
       propertyPath: yMin
-      value: -2.9
+      value: -2.3
       objectReference: {fileID: 0}
     - target: {fileID: 7182186633444235745, guid: 63d373b749cf8904d80f297844640dce, type: 3}
       propertyPath: pLayer

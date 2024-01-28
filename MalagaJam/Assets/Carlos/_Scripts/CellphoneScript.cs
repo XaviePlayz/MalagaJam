@@ -88,6 +88,12 @@ public class CellPhoneScript : MonoBehaviour, IPointerClickHandler
 
         for (int i = 0; i < tableSize; i++)
         {
+            Debug.Log(data[4 * (i + 1)]);
+
+            Debug.Log(data[4 * (i + 1) + 1]);
+            Debug.Log(data[4 * (i + 1) + 2]);
+            Debug.Log(data[4 * (i + 1) + 3]);
+
             string avatarName = data[4 * (i + 1)];
             string name = data[4 * (i + 1) + 1];
             string review = data[4 * (i + 1) + 2];

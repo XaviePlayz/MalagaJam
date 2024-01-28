@@ -20,6 +20,9 @@ public class CharacterController : MonoBehaviour
     public int amountOfAdults;
     public int amountOfChildren;
 
+    [Header("ParallaxLayer")]
+    [SerializeField] private Transform pLayer;
+
     void Start()
     {
         SendNextCharacter();
@@ -30,7 +33,8 @@ public class CharacterController : MonoBehaviour
     {
         currentNPC = allAvailableNPCs[Random.Range(0, allAvailableNPCs.Length)];
 
-        Instantiate(currentNPC);
+        var player =  Instantiate(currentNPC);
+        player.transform.parent = pLayer;
 
         destroyPreviousNPC = GameObject.FindGameObjectWithTag("NPC");
         adults = GameObject.FindGameObjectWithTag("Adults");

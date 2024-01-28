@@ -13,7 +13,7 @@ public class CoinGiveWrapper
     public CoinGiveWrapper(int coinAmount25, int coinAmount100, int coinAmount500, int coinAmount1000)
     {
         this.coinAmount25 = coinAmount25;
-        this.coinAmount100 = coinAmount1000;
+        this.coinAmount100 = coinAmount100;
         this.coinAmount500 = coinAmount500;
         this.coinAmount1000 = coinAmount1000;
     }
@@ -73,6 +73,8 @@ public class TicketController : MonoBehaviour
     private int pricePerAdult = 250;
     private int pricePerChild = 150;
 
+    public ParallaxManager pm;
+
     [SerializeField] private int totalTicketPrice;
     [SerializeField] private int receivedMoney;
     void Start()
@@ -96,30 +98,26 @@ public class TicketController : MonoBehaviour
         int coinAmount100= 0;
         int coinAmount500= 0;
         int coinAmount1000= 0;
-
         if (amount > 1000) {
-            coinAmount1000 = amount % 1000;
-            Debug.Log("1000 coins");
-            Debug.Log(coinAmount1000);
+            coinAmount1000 = amount / 1000;
             amount -= coinAmount1000 * 1000;
         }
 
         if (amount > 500)
         {
-            coinAmount500 = amount % 500;
-            Debug.Log("500 coins");
-            Debug.Log(coinAmount500);
+            coinAmount500 = amount / 500;
             amount -= coinAmount500 * 500;
         }
 
         if (amount > 100)
         {
-            coinAmount100 = amount % 100;
+            coinAmount100 = amount / 100;
             amount -= coinAmount100 * 100;
         }
         if (amount > 25)
         {
-            coinAmount25 = amount % 25;
+            coinAmount25 = amount / 25;
+            Debug.Log(coinAmount25);
             amount -= coinAmount25 * 25;
         }
         if (amount > 0)
@@ -148,57 +146,102 @@ public class TicketController : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        while (receivedMoney < totalTicketPrice)
+        float rCoinCalc = Random.Range(0f, 1f);
+        Debug.Log(rCoinCalc);
+        if (rCoinCalc > 0.5f)
         {
-
+            Debug.Log("New coin method");
             CoinGiveWrapper cw = CalculateCoinNew(totalTicketPrice);
             int coinAmount25 = cw.coinAmount25;
-            int coinAmount100 = cw.coinAmount1000;
+            int coinAmount100 = cw.coinAmount100;
             int coinAmount500 = cw.coinAmount500;
             int coinAmount1000 = cw.coinAmount1000;
 
             for (int i = 0; i < coinAmount25; i++)
             {
-                Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
+                Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
                 var coin = Instantiate(Coin25, pos, Quaternion.identity);
                 coin.transform.parent = pLayer;
                 receivedMoney += 25;
             }
             for (int i = 0; i < coinAmount100; i++)
             {
-                Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
+                Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
                 var coin = Instantiate(Coin100, pos, Quaternion.identity);
                 coin.transform.parent = pLayer;
                 receivedMoney += 100;
             }
             for (int i = 0; i < coinAmount500; i++)
             {
-                if (totalTicketPrice > 500)
-                {
-                    Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
-                    var coin = Instantiate(Coin500, pos, Quaternion.identity);
-                    coin.transform.parent = pLayer;
-                    receivedMoney += 500;
-                }
-                else
-                {
-                    coinAmount500 = 0;
-                }
+                Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
+                var coin = Instantiate(Coin500, pos, Quaternion.identity);
+                coin.transform.parent = pLayer;
+                receivedMoney += 500;
             }
             for (int i = 0; i < coinAmount1000; i++)
             {
-                if (totalTicketPrice > 1000)
+                Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
+                var coin = Instantiate(Bill1000, pos, Quaternion.identity);
+                coin.transform.parent = pLayer;
+                receivedMoney += 1000;
+            }
+        }
+        else
+        {
+            Debug.Log("Old coin method");
+            while (receivedMoney < totalTicketPrice)
+            {
+                CoinGiveWrapper cw = CalculateCoinOld(totalTicketPrice);
+                int coinAmount25 = cw.coinAmount25;
+                int coinAmount100 = cw.coinAmount100;
+                int coinAmount500 = cw.coinAmount500;
+                int coinAmount1000 = cw.coinAmount1000;
+
+                for (int i = 0; i < coinAmount25; i++)
                 {
-                    Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
-                    var coin = Instantiate(Bill1000, pos, Quaternion.identity);
+                    Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
+                    var coin = Instantiate(Coin25, pos, Quaternion.identity);
                     coin.transform.parent = pLayer;
-                    receivedMoney += 1000;
+                    receivedMoney += 25;
                 }
-                else
+                for (int i = 0; i < coinAmount100; i++)
                 {
-                    coinAmount1000 = 0;
+                    Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
+                    var coin = Instantiate(Coin100, pos, Quaternion.identity);
+                    coin.transform.parent = pLayer;
+                    receivedMoney += 100;
+                }
+                for (int i = 0; i < coinAmount500; i++)
+                {
+                    if (totalTicketPrice > 500)
+                    {
+                        Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
+                        var coin = Instantiate(Coin500, pos, Quaternion.identity);
+                        coin.transform.parent = pLayer;
+                        receivedMoney += 500;
+                    }
+                    else
+                    {
+                        coinAmount500 = 0;
+                    }
+                }
+                for (int i = 0; i < coinAmount1000; i++)
+                {
+                    if (totalTicketPrice > 1000)
+                    {
+                        Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
+                        var coin = Instantiate(Bill1000, pos, Quaternion.identity);
+                        coin.transform.parent = pLayer;
+                        receivedMoney += 1000;
+                    }
+                    else
+                    {
+                        coinAmount1000 = 0;
+                    }
                 }
             }
         }
     }
+
+      
 }
