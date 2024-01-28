@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CharacterController : MonoBehaviour
 {
-
-
-
     public GameObject currentNPC;
     public GameObject destroyPreviousNPC;
+    public GameObject bell;
+    public GameObject bellPart;
 
     public GameObject[] allAvailableNPCs;
 
@@ -32,6 +32,14 @@ public class CharacterController : MonoBehaviour
     {
         SendNextCharacter();
         popUp = GameObject.Find("PopUp");
+
+        EventTrigger evTrig = gameObject.AddComponent<EventTrigger>();
+        EventTrigger.Entry clickEvent = new EventTrigger.Entry()
+        {
+            eventID = EventTriggerType.PointerClick
+        };
+        clickEvent.callback.AddListener(CorrectedCurrency);
+        evTrig.triggers.Add(clickEvent);
     }
 
 
@@ -109,11 +117,9 @@ public class CharacterController : MonoBehaviour
 
 
     }
-
-
-    public void CorrectedCurrency()
+    public void CorrectedCurrency(BaseEventData eventData)
     {
-        Debug.Log("buttonpress");
+        StartCoroutine(PressedBell());
         CheckTicketsLogic();
         foreach (GameObject placedTickets in GameObject.FindGameObjectsWithTag("PlacedAdultTickets"))
         {
@@ -133,6 +139,14 @@ public class CharacterController : MonoBehaviour
         CurrencyController.Instance.totalChildrentickets = 0;
         TicketController.Instance.receivedMoney = 0;
         StartCoroutine(CustomerLeaves());
+    }
+
+    public IEnumerator PressedBell()
+    {
+        yield return new WaitForSeconds(0.01f);
+        bellPart.transform.localPosition = new Vector3 (0, 0, 0);
+        yield return new WaitForSeconds(0.35f);
+        bellPart.transform.localPosition = new Vector3(0, 0.32f, 0);
     }
 
     public IEnumerator CustomerLeaves()
