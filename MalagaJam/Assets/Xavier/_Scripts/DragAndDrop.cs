@@ -51,17 +51,17 @@ public class DragAndDrop : MonoBehaviour
             {
                 if (draggingTicket == null && gameObject.CompareTag("AdultTickets"))
                 {
-                    var instantiatedTicket = Instantiate(ticket);
+                    var instantiatedTicket = Instantiate(ticket, ticketInventory.transform.position, Quaternion.identity);
                     instantiatedTicket.transform.parent = pLayer;
-                    draggingTicket = ticket;
+                    draggingTicket = instantiatedTicket;
                 }
                 else if (draggingTicket == null && gameObject.CompareTag("ChildrenTickets"))
                 {
-                    var instantiatedTicket = Instantiate(ticket);
+                    var instantiatedTicket = Instantiate(ticket, ticketInventory.transform.position, Quaternion.identity);
                     instantiatedTicket.transform.parent = pLayer;
-                    draggingTicket = ticket;
+                    draggingTicket = instantiatedTicket;
                 }
-                ticket.transform.position = mousePos - offset;
+                draggingTicket.transform.position = mousePos - offset;
             }
             else
             {
@@ -73,6 +73,7 @@ public class DragAndDrop : MonoBehaviour
         {
             draggingTicket = null;
         }
+
         if (Input.GetMouseButtonUp(0))
         {
             canMove = false;
@@ -88,6 +89,18 @@ public class DragAndDrop : MonoBehaviour
         else if (other.gameObject.CompareTag("Counter") && gameObject.CompareTag("ChildrenTickets"))
         {
             ticket.tag = "PlacedChildrenTickets";
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Counter") && gameObject.CompareTag("PlacedAdultTickets"))
+        {
+            ticket.tag = "AdultTickets";
+        }
+        else if (other.gameObject.CompareTag("Counter") && gameObject.CompareTag("PlacedChildrenTickets"))
+        {
+            ticket.tag = "ChildrenTickets";
         }
     }
 }

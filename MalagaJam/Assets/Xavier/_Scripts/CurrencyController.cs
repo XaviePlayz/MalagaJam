@@ -4,7 +4,32 @@ using UnityEngine;
 
 public class CurrencyController : MonoBehaviour
 {
-    private int TotalMoney;
+
+    #region Singleton
+
+    private static CurrencyController _instance;
+    public static CurrencyController Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<CurrencyController>();
+
+                if (_instance == null)
+                {
+                    GameObject obj = new GameObject();
+                    obj.name = typeof(CurrencyController).Name;
+                    _instance = obj.AddComponent<CurrencyController>();
+                }
+            }
+            return _instance;
+        }
+    }
+
+    #endregion
+
+    public int TotalMoney;
     
     List<GameObject> Coins25 = new List<GameObject>();
     public Sprite placed25;
@@ -18,8 +43,11 @@ public class CurrencyController : MonoBehaviour
     List<GameObject> Bills1000 = new List<GameObject>();
     public Sprite placed1000;
     public Sprite unplaced1000;
-    private int totalAdultTickets;
-    private int totalChildrentickets;
+    public int totalAdultTickets;
+    public int totalChildrentickets;
+
+    public List<GameObject> coinsInCounter = new List<GameObject>();
+
 
     void Start()
     {
@@ -48,6 +76,9 @@ public class CurrencyController : MonoBehaviour
 			Bills1000.Add(Bill1000);
 		}
         TotalMoney = (Coins25.Count * 25) + (Coins100.Count * 100) + (Coins500.Count * 500) + (Bills1000.Count * 1000);
+
+        // substract the total amount of money that is in the change box at start:
+        TotalMoney -= 9000;
     }
 
     public void OnTriggerEnter2D(Collider2D other) 
@@ -57,6 +88,7 @@ public class CurrencyController : MonoBehaviour
             TotalMoney+=25;
             Debug.Log("+25, total " + TotalMoney); 
             other.GetComponent<SpriteRenderer>().sprite = placed25;
+            coinsInCounter.Add(other.gameObject);
         }         
         
         else if (other.gameObject.CompareTag("100")) 
@@ -64,20 +96,23 @@ public class CurrencyController : MonoBehaviour
             TotalMoney+=100;
             Debug.Log("+100, total " + TotalMoney); 
             other.GetComponent<SpriteRenderer>().sprite = placed100;
-        }          
-        
+            coinsInCounter.Add(other.gameObject);
+        }
+
         else if (other.gameObject.CompareTag("500")) 
         { 
             TotalMoney+=500;
             Debug.Log("+500, total " + TotalMoney); 
             other.GetComponent<SpriteRenderer>().sprite = placed500;
-        }          
-        
+            coinsInCounter.Add(other.gameObject);
+        }
+
         else if (other.gameObject.CompareTag("1000")) 
         { 
             TotalMoney+=1000;
             Debug.Log("+1000, total " + TotalMoney); 
             other.GetComponent<SpriteRenderer>().sprite = placed1000;
+            coinsInCounter.Add(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("PlacedAdultTickets"))
@@ -93,23 +128,35 @@ public class CurrencyController : MonoBehaviour
     public void OnTriggerExit2D(Collider2D other) 
     {
         if (other.gameObject.CompareTag("25")) 
-        { 
+        {
+            TotalMoney -= 25;
+            Debug.Log("-25, total " + TotalMoney);
             other.GetComponent<SpriteRenderer>().sprite = unplaced25;
-        }         
-        
+            coinsInCounter.Remove(other.gameObject);
+        }
+
         else if (other.gameObject.CompareTag("100")) 
-        { 
+        {
+            TotalMoney -= 100;
+            Debug.Log("-100, total " + TotalMoney);
             other.GetComponent<SpriteRenderer>().sprite = unplaced100;
-        }          
-        
+            coinsInCounter.Remove(other.gameObject);
+        }
+
         else if (other.gameObject.CompareTag("500")) 
-        { 
+        {
+            TotalMoney -= 500;
+            Debug.Log("-500, total " + TotalMoney);
             other.GetComponent<SpriteRenderer>().sprite = unplaced500;
-        }          
-        
+            coinsInCounter.Remove(other.gameObject);
+        }
+
         else if (other.gameObject.CompareTag("1000")) 
-        { 
+        {
+            TotalMoney -= 1000;
+            Debug.Log("-1000, total " + TotalMoney);
             other.GetComponent<SpriteRenderer>().sprite = unplaced1000;
+            coinsInCounter.Remove(other.gameObject);
         }
         if (other.gameObject.CompareTag("PlacedAdultTickets"))
         {

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
+
+
+
     public GameObject currentNPC;
     public GameObject destroyPreviousNPC;
 
@@ -33,7 +36,7 @@ public class CharacterController : MonoBehaviour
     {
         currentNPC = allAvailableNPCs[Random.Range(0, allAvailableNPCs.Length)];
 
-        var player =  Instantiate(currentNPC);
+        var player = Instantiate(currentNPC);
         player.transform.parent = pLayer;
 
         destroyPreviousNPC = GameObject.FindGameObjectWithTag("NPC");
@@ -47,18 +50,70 @@ public class CharacterController : MonoBehaviour
         if (adults != null && children != null)
         {
             adults.GetComponent<TextMeshProUGUI>().text = "Adults: " + amountOfAdults;
-            children.GetComponent<TextMeshProUGUI>().text = "Children: " + amountOfChildren;
+            children.GetComponent<TextMeshProUGUI>().text = "Kids: " + amountOfChildren;
         }
 
         StartCoroutine(TicketController.Instance.ReceiveMoney());
     }
 
+    public int CheckTicketsLogic()
+    {
+        var moneyOnSurface = CurrencyController.Instance.TotalMoney;
+        var ticketPrice = TicketController.Instance.totalTicketPrice;
+        var receivedMoney = TicketController.Instance.receivedMoney;
+
+        var moneyShouldBeLeft = receivedMoney - ticketPrice;
+
+        var adultTickets = CurrencyController.Instance.totalAdultTickets;
+        var childrenTickets = CurrencyController.Instance.totalChildrentickets;
+        //Debug.Log("adults " + adultTickets + "--" + "childrens " + childrenTickets + "--" + "adults amount " + adultTickets + "--" + "childrens amount" + childrenTickets + "--");
+
+        if (adultTickets == amountOfAdults && childrenTickets == amountOfChildren) { 
+            if (moneyOnSurface > moneyShouldBeLeft) {
+                Debug.Log("You left more money than needed");
+                return 2;
+            }
+            else if (moneyOnSurface == moneyShouldBeLeft)
+            {
+                Debug.Log("Perfect");
+                return 1;
+            }
+            else if (moneyOnSurface < moneyShouldBeLeft)
+            {
+                Debug.Log("ClientIsMad");
+                return 0;
+            }
+        }
+        else
+        {
+            Debug.Log("NotEnoughTickets");
+            return -1;
+        }
+
+        return -2;
+
+    }
+
     public void CorrectedCurrency()
     {
-        foreach (GameObject placedTickets in GameObject.FindGameObjectsWithTag("PlacedTicket"))
+        CheckTicketsLogic();
+        foreach (GameObject placedTickets in GameObject.FindGameObjectsWithTag("PlacedAdultTickets"))
         {
             Destroy(placedTickets);
         }
+        foreach (GameObject placedTickets in GameObject.FindGameObjectsWithTag("PlacedChildrenTickets"))
+        {
+            Destroy(placedTickets);
+        }
+
+        List<GameObject> temporary = new List<GameObject>(CurrencyController.Instance.coinsInCounter);
+        foreach (GameObject coin in temporary)
+        {
+            Destroy(coin);
+        }
+        CurrencyController.Instance.totalAdultTickets = 0;
+        CurrencyController.Instance.totalChildrentickets = 0;
+        TicketController.Instance.receivedMoney = 0;
         StartCoroutine(CustomerLeaves());
     }
 

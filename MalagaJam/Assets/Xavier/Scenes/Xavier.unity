@@ -397,30 +397,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: texture_TicketBoxAdult
       objectReference: {fileID: 0}
-    - target: {fileID: 1638929443016677725, guid: e7669f2b7ef2e98458e9c390cc706dc1, type: 3}
-      propertyPath: m_Size.x
-      value: 1.1923738
-      objectReference: {fileID: 0}
-    - target: {fileID: 1638929443016677725, guid: e7669f2b7ef2e98458e9c390cc706dc1, type: 3}
-      propertyPath: m_Size.y
-      value: 1.9514701
-      objectReference: {fileID: 0}
-    - target: {fileID: 1638929443016677725, guid: e7669f2b7ef2e98458e9c390cc706dc1, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.09618688
-      objectReference: {fileID: 0}
-    - target: {fileID: 1638929443016677725, guid: e7669f2b7ef2e98458e9c390cc706dc1, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.47573507
-      objectReference: {fileID: 0}
+    - target: {fileID: 5189563906230827882, guid: e7669f2b7ef2e98458e9c390cc706dc1, type: 3}
+      propertyPath: pLayer
+      value: 
+      objectReference: {fileID: 1873731845}
     - target: {fileID: 5189563906230827882, guid: e7669f2b7ef2e98458e9c390cc706dc1, type: 3}
       propertyPath: ticket
       value: 
       objectReference: {fileID: 704047480}
-    - target: {fileID: 5189563906230827882, guid: e7669f2b7ef2e98458e9c390cc706dc1, type: 3}
-      propertyPath: ticketInventory
-      value: 
-      objectReference: {fileID: 1759763372}
     - target: {fileID: 9048828968395577084, guid: e7669f2b7ef2e98458e9c390cc706dc1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.38
@@ -1192,32 +1176,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 1873731845}
     m_Modifications:
     - target: {fileID: 401731761717102801, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
+      propertyPath: pLayer
+      value: 
+      objectReference: {fileID: 1873731845}
+    - target: {fileID: 401731761717102801, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
       propertyPath: ticket
       value: 
       objectReference: {fileID: 2119858412}
-    - target: {fileID: 401731761717102801, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
-      propertyPath: ticketInventory
-      value: 
-      objectReference: {fileID: 1249606879}
     - target: {fileID: 1361613461066458570, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
       propertyPath: m_Name
       value: texture_TicketBoxKid
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160982896638849325, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
-      propertyPath: m_Size.x
-      value: 1.2027731
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160982896638849325, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
-      propertyPath: m_Size.y
-      value: 1.9358723
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160982896638849325, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.05979204
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160982896638849325, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.46793616
       objectReference: {fileID: 0}
     - target: {fileID: 6988721450896255474, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2264,11 +2232,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1249606879 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1361613461066458570, guid: 7ca3f50dc9cd5d14993a33b02c28acd4, type: 3}
-  m_PrefabInstance: {fileID: 655453109}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1275554461
 GameObject:
   m_ObjectHideFlags: 0
@@ -2778,11 +2741,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1759763372 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1446286148928004295, guid: e7669f2b7ef2e98458e9c390cc706dc1, type: 3}
-  m_PrefabInstance: {fileID: 147303190}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1806090829
 GameObject:
   m_ObjectHideFlags: 0
@@ -3440,11 +3398,11 @@ PrefabInstance:
       objectReference: {fileID: 1873731845}
     - target: {fileID: 6827971938038237487, guid: 9af4c5540045a8e44b4c99403ce261dd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.53
+      value: -10.09
       objectReference: {fileID: 0}
     - target: {fileID: 6827971938038237487, guid: 9af4c5540045a8e44b4c99403ce261dd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.53
+      value: -10.48
       objectReference: {fileID: 0}
     - target: {fileID: 6827971938038237487, guid: 9af4c5540045a8e44b4c99403ce261dd, type: 3}
       propertyPath: m_LocalPosition.z
