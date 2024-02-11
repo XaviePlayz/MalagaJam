@@ -21,6 +21,6 @@ public class GameEvents : MonoBehaviour
     public void TimeRunOut()
     {
         if (OnTimeRunOut != null) OnTimeRunOut();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
     }
 }

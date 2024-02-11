@@ -172,9 +172,9 @@ public class CellPhoneScript : MonoBehaviour, IPointerClickHandler
         Vector3 startPosition = rt.anchoredPosition;
         for (int i = 0; i < 10; i++)
         {
-            rt.anchoredPosition += new Vector2(7f, 0);
+            rt.anchoredPosition += new Vector2(3f, 0);
             yield return new WaitForSeconds(0.03f);
-            rt.anchoredPosition -= new Vector2(7f, 0);
+            rt.anchoredPosition -= new Vector2(3f, 0);
             yield return new WaitForSeconds(0.03f);
         }
     }

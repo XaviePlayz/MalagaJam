@@ -20,7 +20,7 @@ public class AudioVolumeController : MonoBehaviour
         options.SetActive(false);
 
         // Load the saved volume value
-        float savedVolume = PlayerPrefs.GetFloat(VolumeKey, 1f);
+        float savedVolume = PlayerPrefs.GetFloat(VolumeKey, 0.05f);
         volumeSlider.value = savedVolume;
         SetVolume(savedVolume);
 
