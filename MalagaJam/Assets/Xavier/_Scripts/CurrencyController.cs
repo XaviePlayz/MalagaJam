@@ -158,11 +158,11 @@ public class CurrencyController : MonoBehaviour
             other.GetComponent<SpriteRenderer>().sprite = unplaced1000;
             coinsInCounter.Remove(other.gameObject);
         }
-        if (other.gameObject.CompareTag("PlacedAdultTickets"))
+        if (other.gameObject.CompareTag("AdultTickets"))
         {
             totalAdultTickets -= 1;
         }
-        else if (other.gameObject.CompareTag("PlacedChildrenTickets"))
+        else if (other.gameObject.CompareTag("ChildrenTickets"))
         {
             totalChildrentickets -= 1;
         }
