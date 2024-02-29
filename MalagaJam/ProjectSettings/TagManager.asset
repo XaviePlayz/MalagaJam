@@ -16,6 +16,10 @@ TagManager:
   - PlacedChildrenTickets
   - AdultTickets
   - ChildrenTickets
+  - "\u20AC0.50"
+  - "\u20AC1.00"
+  - "\u20AC5.00"
+  - "\u20AC10.00"
   layers:
   - Default
   - TransparentFX
