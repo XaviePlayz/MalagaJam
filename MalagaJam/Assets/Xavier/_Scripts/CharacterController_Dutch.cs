@@ -6,6 +6,31 @@ using UnityEngine.EventSystems;
 
 public class CharacterController_Dutch : MonoBehaviour
 {
+
+    #region Singleton
+
+    private static CharacterController_Dutch _instance;
+    public static CharacterController_Dutch Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<CharacterController_Dutch>();
+
+                if (_instance == null)
+                {
+                    GameObject obj = new GameObject();
+                    obj.name = typeof(CharacterController_Dutch).Name;
+                    _instance = obj.AddComponent<CharacterController_Dutch>();
+                }
+            }
+            return _instance;
+        }
+    }
+
+    #endregion
+
     public GameObject currentNPC;
     public bool isHelping;
     public GameObject destroyPreviousNPC;
@@ -31,7 +56,6 @@ public class CharacterController_Dutch : MonoBehaviour
 
     void Start()
     {
-        SendNextCharacter();
         popUp = GameObject.Find("PopUp");
 
         EventTrigger evTrig = gameObject.AddComponent<EventTrigger>();
@@ -44,7 +68,7 @@ public class CharacterController_Dutch : MonoBehaviour
     }
 
 
-    private void SendNextCharacter()
+    public void SendNextCharacter()
     {
         currentNPC = allAvailableNPCs[Random.Range(0, allAvailableNPCs.Length)];
         isHelping = true;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CoinGiveWrapper_Dutch
 {
@@ -56,8 +57,17 @@ public class TicketController_Dutch : MonoBehaviour
     public float yMin;
     public float yMax;
 
-    private float pricePerAdult = 7.00f;
-    private float pricePerChild = 3.50f;
+    public float pricePerAdult;
+    public float pricePerChild;
+    public int difficulty; // 0 = Easy, 1 = Normal, 2 = Hard
+    public GameObject difficultyButtons;
+    
+    public SpriteRenderer priceBoard;
+    public Sprite PriceBoard_Easy;
+    public Sprite PriceBoard_Normal;
+    public Sprite PriceBoard_Hard;
+
+    public Animator animPhone;
 
     public ParallaxManager pm;
 
@@ -68,13 +78,39 @@ public class TicketController_Dutch : MonoBehaviour
     {
         characterController = FindObjectOfType<CharacterController_Dutch>();
         currencyController = FindObjectOfType<CurrencyController_Dutch>();
+        Time.timeScale = 0f; // Set time scale to 0 to pause the game
+        if (difficultyButtons != null)
+        {
+            difficultyButtons.SetActive(true);
+        }
+        if (animPhone != null)
+        {
+            animPhone.updateMode = AnimatorUpdateMode.UnscaledTime;
+        }
     }
 
     void Update()
     {
         if (characterController.currentNPC != null)
         {
-            totalTicketPrice = (pricePerAdult * characterController.amountOfAdults) + (pricePerChild * characterController.amountOfChildren);
+            if (difficulty == 0)
+            {
+                pricePerAdult = 4.00f;
+                pricePerChild = 3.00f;
+                totalTicketPrice = (pricePerAdult * characterController.amountOfAdults) + (pricePerChild * characterController.amountOfChildren);
+            }
+            if (difficulty == 1)
+            {
+                pricePerAdult = 7.00f;
+                pricePerChild = 4.50f;
+                totalTicketPrice = (pricePerAdult * characterController.amountOfAdults) + (pricePerChild * characterController.amountOfChildren);
+            }
+            if (difficulty == 2)
+            {
+                pricePerAdult = 13.50f;
+                pricePerChild = 9.50f;
+                totalTicketPrice = (pricePerAdult * characterController.amountOfAdults) + (pricePerChild * characterController.amountOfChildren);
+            }
         }
     }
 
@@ -234,5 +270,33 @@ public class TicketController_Dutch : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void EasyDifficulty()
+    {
+        Time.timeScale = 1f; // Set time scale back to 1 to resume the game
+        difficulty = 0;
+        difficultyButtons.SetActive(false);
+        priceBoard.sprite = PriceBoard_Easy;
+        animPhone.SetTrigger("HidePhone");
+        CharacterController_Dutch.Instance.SendNextCharacter();
+    }
+    public void NormalDifficulty()
+    {
+        Time.timeScale = 1f; // Set time scale back to 1 to resume the game
+        difficulty = 1;
+        difficultyButtons.SetActive(false);
+        priceBoard.sprite = PriceBoard_Normal;
+        animPhone.SetTrigger("HidePhone");
+        CharacterController_Dutch.Instance.SendNextCharacter();
+    }
+    public void HardDifficulty()
+    {
+        Time.timeScale = 1f; // Set time scale back to 1 to resume the game
+        difficulty = 2;
+        difficultyButtons.SetActive(false);
+        priceBoard.sprite = PriceBoard_Hard;
+        animPhone.SetTrigger("HidePhone");
+        CharacterController_Dutch.Instance.SendNextCharacter();
     }
 }

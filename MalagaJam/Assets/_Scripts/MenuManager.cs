@@ -13,6 +13,11 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(1);
         Time.timeScale = 1f; // Set time scale back to 1 to resume the game
     }
+    public void TutorialButton()
+    {
+        SceneManager.LoadScene(3);
+        Time.timeScale = 1f; // Set time scale back to 1 to resume the game
+    }
 
     public void Credits()
     {
