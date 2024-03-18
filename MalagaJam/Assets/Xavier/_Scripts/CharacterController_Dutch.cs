@@ -96,6 +96,10 @@ public class CharacterController_Dutch : MonoBehaviour
             previousTutorialText++;
             currentTutorialText++;
         }
+        if (isTutorial && Input.GetKeyDown(KeyCode.Mouse0) && tutorialTexts[1].activeSelf)
+        {
+            SendNextCharacter();
+        }
     }
 
     public void SendNextCharacter()
@@ -110,8 +114,16 @@ public class CharacterController_Dutch : MonoBehaviour
         children = GameObject.FindGameObjectWithTag("Children");
         anim = GameObject.FindAnyObjectByType<Animator>();
 
-        amountOfAdults = Random.Range(1, 5);
-        amountOfChildren = Random.Range(1, 5);
+        if (isTutorial)
+        {
+            amountOfAdults = 2;
+            amountOfChildren = 1;
+        }
+        else
+        {
+            amountOfAdults = Random.Range(1, 5);
+            amountOfChildren = Random.Range(1, 5);
+        }
 
         if (adults != null && children != null)
         {
