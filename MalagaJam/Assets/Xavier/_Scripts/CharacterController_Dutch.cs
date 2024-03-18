@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -53,6 +54,18 @@ public class CharacterController_Dutch : MonoBehaviour
     [SerializeField] private Transform pLayer;
 
     public GameObject popUp;
+    public bool isTutorial;
+    public GameObject[] tutorialTexts;
+    private int currentTutorialText = 1;
+    private int previousTutorialText = 0;
+    public GameObject pauseMenu, optionsMenu;
+
+    [Header("Clients")]
+    [SerializeField] private int GivenTooMuchMoneyClients;
+    [SerializeField] private int perfectClients;
+    [SerializeField] private int MadClients;
+    [SerializeField] private int NotGivenEnoughTicketsClients;
+
 
     void Start()
     {
@@ -67,6 +80,23 @@ public class CharacterController_Dutch : MonoBehaviour
         evTrig.triggers.Add(clickEvent);
     }
 
+    void Update()
+    {
+        if (isTutorial && Input.GetKeyDown(KeyCode.Mouse0) && !pauseMenu.activeSelf && !optionsMenu.activeSelf)
+        {
+            Time.timeScale = 1f; // Set time scale back to 1 to resume the game
+            if (currentTutorialText < tutorialTexts.Length)
+            {
+                tutorialTexts[currentTutorialText].SetActive(true);
+            }
+            if (previousTutorialText < tutorialTexts.Length)
+            {
+                tutorialTexts[previousTutorialText].SetActive(false);
+            }
+            previousTutorialText++;
+            currentTutorialText++;
+        }
+    }
 
     public void SendNextCharacter()
     {
@@ -106,23 +136,27 @@ public class CharacterController_Dutch : MonoBehaviour
         if (adultTickets == amountOfAdults && childrenTickets == amountOfChildren) { 
             if (moneyOnSurface > moneyShouldBeLeft) {
                 Debug.Log("You left more money than needed");
+                GivenTooMuchMoneyClients++;
                 StartCoroutine(PopUpReaction(3));
             }
             else if (moneyOnSurface == moneyShouldBeLeft)
             {
                 Debug.Log("Perfect");
+                perfectClients++;
                 StartCoroutine(PopUpReaction(2));
 
             }
             else if (moneyOnSurface < moneyShouldBeLeft)
             {
                 Debug.Log("ClientIsMad");
+                MadClients++;
                 StartCoroutine(PopUpReaction(1));
             }
         }
         else
         {
             Debug.Log("NotEnoughTickets");
+            NotGivenEnoughTicketsClients++;
             StartCoroutine(PopUpReaction(0));
         }
 

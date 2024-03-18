@@ -10,13 +10,16 @@ public class AudioVolumeController : MonoBehaviour
 
     [Header("Scenes")]
     public GameObject pauseMenu;
-    public GameObject options;
+    public GameObject mainMenu, options;
     float gameVolume;
 
     private void Start()
     {
         // Load Game
-        pauseMenu.SetActive(false);
+        if (pauseMenu != null)
+        {
+            pauseMenu.SetActive(false);
+        }
         options.SetActive(false);
 
         // Load the saved volume value
@@ -43,6 +46,25 @@ public class AudioVolumeController : MonoBehaviour
     public void ConfirmSettings()
     {
         pauseMenu.SetActive(true);
+        options.SetActive(false);
+        SetVolume(gameVolume);
+    }
+
+    public void OpenSettingsInMainMenu()
+    {
+        mainMenu.SetActive(false);
+        options.SetActive(true);
+        SetVolume(gameVolume);
+
+        // Load the saved volume value
+        float savedVolume = PlayerPrefs.GetFloat(VolumeKey, 1f);
+        volumeSlider.value = savedVolume;
+        SetVolume(savedVolume);
+    }
+
+    public void ConfirmSettingsInMainMenu()
+    {
+        mainMenu.SetActive(true);
         options.SetActive(false);
         SetVolume(gameVolume);
     }

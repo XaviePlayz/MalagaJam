@@ -5,16 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: b1a49a9d85faff64d9b6697492e7dd96
+    path: Assets/Xavier/Scenes/MainMenu_Dutch.unity
+    guid: 63115a1c5b2a7424d8e9af6bfc80c85d
   - enabled: 1
-    path: Assets/Scenes/Main.unity
-    guid: fe983df057c56a34c9907ddc638f6fa4
+    path: Assets/Xavier/Scenes/Main_Dutch.unity
+    guid: 0806594610e227f468bcfba0cf49ce35
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: cc7fd7fc217aebe4ab6df98591b0d0bf
+  - enabled: 1
+    path: Assets/Xavier/Scenes/Tutorial_Dutch.unity
+    guid: 839dbd5505a75f04aa2bd1c9ff62d4e6
   m_configObjects: {}
