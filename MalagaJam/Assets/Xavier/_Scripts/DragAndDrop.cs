@@ -35,7 +35,7 @@ public class DragAndDrop : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (col == Physics2D.OverlapPoint(mousePos))
+            if (col == Physics2D.OverlapPoint(mousePos) && !CharacterController_Dutch.Instance.outOfTime && TicketController_Dutch.Instance.gameStarted)
             {
                 canMove = true;
             }
@@ -43,6 +43,7 @@ public class DragAndDrop : MonoBehaviour
             {
                 canMove = false;
             }
+
             if (canMove)
             {
                 dragging = true;

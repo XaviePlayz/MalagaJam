@@ -49,4 +49,8 @@ public class PauseMenu : MonoBehaviour
         // Load the MainMenu
         SceneManager.LoadScene(0);
     }
+    public void RetryButton()
+    {
+        SceneManager.LoadScene(1);
+    }
 }

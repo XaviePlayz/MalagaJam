@@ -61,7 +61,7 @@ public class TicketController : MonoBehaviour
     public float xMax;
 
     // Parallax layer for the coins
-    [Header("Parllax Layer Transform")]
+    [Header("Parallax Layer Transform")]
     public Transform pLayer;
 
 

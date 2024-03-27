@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class CharacterController_Dutch : MonoBehaviour
 {
@@ -55,20 +56,33 @@ public class CharacterController_Dutch : MonoBehaviour
 
     public GameObject popUp;
     public bool isTutorial;
+    public bool tutorialTextCompleted;
     public GameObject[] tutorialTexts;
     private int currentTutorialText = 1;
     private int previousTutorialText = 0;
     public GameObject pauseMenu, optionsMenu;
 
     [Header("Clients")]
-    [SerializeField] private int GivenTooMuchMoneyClients;
-    [SerializeField] private int perfectClients;
-    [SerializeField] private int MadClients;
-    [SerializeField] private int NotGivenEnoughTicketsClients;
+    public bool outOfTime;
+    public int givenTooMuchMoneyClients;
+    public int perfectClients;
+    public int madClients;
+    public int notGivenEnoughTicketsClients;
+    public TextMeshProUGUI givenTooMuchMoneyClientsText;
+    public TextMeshProUGUI perfectClientsText;
+    public TextMeshProUGUI madClientsText;
+    public TextMeshProUGUI notGivenEnoughTicketsClientsText;
 
+    public int clientSatisfactionScore;
+    public TextMeshProUGUI clientSatisfactionScoreText;
 
     void Start()
     {
+        clientSatisfactionScoreText.text = clientSatisfactionScore.ToString("D6");
+        givenTooMuchMoneyClients = 0;
+        perfectClients = 0;
+        madClients = 0;
+        notGivenEnoughTicketsClients = 0;
         popUp = GameObject.Find("PopUp");
 
         EventTrigger evTrig = gameObject.AddComponent<EventTrigger>();
@@ -92,6 +106,11 @@ public class CharacterController_Dutch : MonoBehaviour
             if (previousTutorialText < tutorialTexts.Length)
             {
                 tutorialTexts[previousTutorialText].SetActive(false);
+            }
+
+            if (currentTutorialText == tutorialTexts.Length)
+            {
+                TicketController_Dutch.Instance.gameStarted = true;
             }
             previousTutorialText++;
             currentTutorialText++;
@@ -147,28 +166,37 @@ public class CharacterController_Dutch : MonoBehaviour
 
         if (adultTickets == amountOfAdults && childrenTickets == amountOfChildren) { 
             if (moneyOnSurface > moneyShouldBeLeft) {
-                Debug.Log("You left more money than needed");
-                GivenTooMuchMoneyClients++;
+                Debug.Log($"You left €{moneyOnSurface - moneyShouldBeLeft} more than the actual ticketprices");
+                givenTooMuchMoneyClients++;
+                if (clientSatisfactionScore > 0)
+                {
+                    clientSatisfactionScore += Random.Range(3, 8);
+                }
                 StartCoroutine(PopUpReaction(3));
             }
             else if (moneyOnSurface == moneyShouldBeLeft)
             {
                 Debug.Log("Perfect");
                 perfectClients++;
+
+                clientSatisfactionScore += Random.Range(121, 164);
                 StartCoroutine(PopUpReaction(2));
 
             }
             else if (moneyOnSurface < moneyShouldBeLeft)
             {
+                Debug.Log($"You gave €{moneyOnSurface - moneyShouldBeLeft} less change than the actual ticketprices");
                 Debug.Log("ClientIsMad");
-                MadClients++;
+                clientSatisfactionScore -= Random.Range(23, 34);
+                madClients++;
                 StartCoroutine(PopUpReaction(1));
             }
         }
         else
         {
             Debug.Log("NotEnoughTickets");
-            NotGivenEnoughTicketsClients++;
+            notGivenEnoughTicketsClients++;
+            clientSatisfactionScore -= Random.Range(12, 17);
             StartCoroutine(PopUpReaction(0));
         }
 
@@ -178,14 +206,20 @@ public class CharacterController_Dutch : MonoBehaviour
 
     IEnumerator PopUpReaction(int reactionNumber)
     {
+        if (clientSatisfactionScore < 0)
+        {
+            clientSatisfactionScore = 0;
+        }
+        clientSatisfactionScoreText.text = clientSatisfactionScore.ToString("D6");
 
-        popUp.GetComponent<Transform>().GetChild(reactionNumber).gameObject.SetActive(true);
+        if (!outOfTime)
+        {
+            popUp.GetComponent<Transform>().GetChild(reactionNumber).gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(2f);
 
-        popUp.GetComponent<Transform>().GetChild(reactionNumber).gameObject.SetActive(false);
-
-
+            popUp.GetComponent<Transform>().GetChild(reactionNumber).gameObject.SetActive(false);
+        }
     }
     public void CorrectedCurrency(BaseEventData eventData)
     {
@@ -213,6 +247,31 @@ public class CharacterController_Dutch : MonoBehaviour
             StartCoroutine(CustomerLeaves());
         }       
     }
+    public void LastCustomerLeaves()
+    {
+        if (isHelping)
+        {
+            CheckTicketsLogic();
+            foreach (GameObject placedTickets in GameObject.FindGameObjectsWithTag("PlacedAdultTickets"))
+            {
+                Destroy(placedTickets);
+            }
+            foreach (GameObject placedTickets in GameObject.FindGameObjectsWithTag("PlacedChildrenTickets"))
+            {
+                Destroy(placedTickets);
+            }
+
+            List<GameObject> temporary = new List<GameObject>(CurrencyController_Dutch.Instance.coinsInCounter);
+            foreach (GameObject coin in temporary)
+            {
+                Destroy(coin);
+            }
+            CurrencyController_Dutch.Instance.totalAdultTickets = 0;
+            CurrencyController_Dutch.Instance.totalChildrentickets = 0;
+            TicketController_Dutch.Instance.receivedMoney = 0;
+            StartCoroutine(CustomerLeaves());
+        }
+    }
 
     public IEnumerator PressedBell()
     {
@@ -230,9 +289,13 @@ public class CharacterController_Dutch : MonoBehaviour
       
         yield return new WaitForSeconds(1);
         Destroy(destroyPreviousNPC);
-        destroyPreviousNPC = null;
 
         yield return new WaitForSeconds(1);
-        SendNextCharacter();     
+        destroyPreviousNPC = null;
+
+        if (!outOfTime)
+        {
+            SendNextCharacter();
+        }
     }
 }

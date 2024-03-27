@@ -41,6 +41,8 @@ public class TicketController_Dutch : MonoBehaviour
         }
     }
 
+    public bool gameStarted;
+
     private CharacterController_Dutch characterController;
     private CurrencyController_Dutch currencyController;
 
@@ -274,28 +276,28 @@ public class TicketController_Dutch : MonoBehaviour
 
     public void EasyDifficulty()
     {
-        Time.timeScale = 1f; // Set time scale back to 1 to resume the game
         difficulty = 0;
-        difficultyButtons.SetActive(false);
         priceBoard.sprite = PriceBoard_Easy;
-        animPhone.SetTrigger("HidePhone");
-        CharacterController_Dutch.Instance.SendNextCharacter();
+        DifficultySelected();
     }
     public void NormalDifficulty()
     {
-        Time.timeScale = 1f; // Set time scale back to 1 to resume the game
         difficulty = 1;
-        difficultyButtons.SetActive(false);
         priceBoard.sprite = PriceBoard_Normal;
-        animPhone.SetTrigger("HidePhone");
-        CharacterController_Dutch.Instance.SendNextCharacter();
+        DifficultySelected();
     }
     public void HardDifficulty()
     {
-        Time.timeScale = 1f; // Set time scale back to 1 to resume the game
         difficulty = 2;
-        difficultyButtons.SetActive(false);
         priceBoard.sprite = PriceBoard_Hard;
+        DifficultySelected();
+    }
+
+    void DifficultySelected()
+    {
+        gameStarted = true;
+        Time.timeScale = 1f; // Set time scale back to 1 to resume the game
+        difficultyButtons.SetActive(false);
         animPhone.SetTrigger("HidePhone");
         CharacterController_Dutch.Instance.SendNextCharacter();
     }
