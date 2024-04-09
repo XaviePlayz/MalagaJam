@@ -44,7 +44,6 @@ public class TicketController_Dutch : MonoBehaviour
     public bool gameStarted;
 
     private CharacterController_Dutch characterController;
-    private CurrencyController_Dutch currencyController;
 
     public GameObject Coin50Cents;
     public GameObject Coin1Euro;
@@ -68,6 +67,7 @@ public class TicketController_Dutch : MonoBehaviour
     public Sprite PriceBoard_Easy;
     public Sprite PriceBoard_Normal;
     public Sprite PriceBoard_Hard;
+    public GameObject phoneHolder;
 
     public Animator animPhone;
 
@@ -79,7 +79,6 @@ public class TicketController_Dutch : MonoBehaviour
     void Start()
     {
         characterController = FindObjectOfType<CharacterController_Dutch>();
-        currencyController = FindObjectOfType<CurrencyController_Dutch>();
         Time.timeScale = 0f; // Set time scale to 0 to pause the game
         if (difficultyButtons != null)
         {
@@ -299,6 +298,7 @@ public class TicketController_Dutch : MonoBehaviour
         Time.timeScale = 1f; // Set time scale back to 1 to resume the game
         difficultyButtons.SetActive(false);
         animPhone.SetTrigger("HidePhone");
+        phoneHolder.SetActive(true);
         CharacterController_Dutch.Instance.SendNextCharacter();
     }
 }

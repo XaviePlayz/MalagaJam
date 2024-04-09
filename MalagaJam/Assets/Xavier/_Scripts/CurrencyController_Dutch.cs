@@ -31,9 +31,9 @@ public class CurrencyController_Dutch : MonoBehaviour
 
     public float TotalMoney;
     
-    List<GameObject> Coins25 = new List<GameObject>();
-    public Sprite placed25;
-    public Sprite unplaced25;
+    List<GameObject> Coins50 = new List<GameObject>();
+    public Sprite placed50;
+    public Sprite unplaced50;
     List<GameObject> Coins100 = new List<GameObject>();
     public Sprite placed100;
     public Sprite unplaced100;
@@ -58,7 +58,7 @@ public class CurrencyController_Dutch : MonoBehaviour
     {
         foreach(GameObject Coin25 in GameObject.FindGameObjectsWithTag("€0.50")) 
         {
-			Coins25.Add(Coin25);
+			Coins50.Add(Coin25);
 		}
 
         foreach(GameObject Coin100 in GameObject.FindGameObjectsWithTag("€1.00")) 
@@ -75,7 +75,7 @@ public class CurrencyController_Dutch : MonoBehaviour
         {
 			Bills1000.Add(Bill1000);
 		}
-        TotalMoney = (Coins25.Count * 0.50f) + (Coins100.Count * 1) + (Coins500.Count * 5) + (Bills1000.Count * 10);
+        TotalMoney = (Coins50.Count * 0.50f) + (Coins100.Count * 1) + (Coins500.Count * 5) + (Bills1000.Count * 10);
 
         // substract the total amount of money that is in the change box at start:
         TotalMoney -= 93;
@@ -87,7 +87,7 @@ public class CurrencyController_Dutch : MonoBehaviour
         { 
             TotalMoney+=0.50f;
             Debug.Log("+€0.50, total " + TotalMoney); 
-            other.GetComponent<SpriteRenderer>().sprite = placed25;
+            other.GetComponent<SpriteRenderer>().sprite = placed50;
             coinsInCounter.Add(other.gameObject);
         }         
         
@@ -131,7 +131,7 @@ public class CurrencyController_Dutch : MonoBehaviour
         {
             TotalMoney -= 0.50f;
             Debug.Log("-€0.50, total " + TotalMoney);
-            other.GetComponent<SpriteRenderer>().sprite = unplaced25;
+            other.GetComponent<SpriteRenderer>().sprite = unplaced50;
             coinsInCounter.Remove(other.gameObject);
         }
 

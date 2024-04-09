@@ -16,10 +16,6 @@ public class AudioVolumeController : MonoBehaviour
     private void Start()
     {
         // Load Game
-        if (pauseMenu != null)
-        {
-            pauseMenu.SetActive(false);
-        }
         options.SetActive(false);
 
         // Load the saved volume value
@@ -48,6 +44,11 @@ public class AudioVolumeController : MonoBehaviour
         pauseMenu.SetActive(true);
         options.SetActive(false);
         SetVolume(gameVolume);
+
+        if (CellPhoneScriptDutch.Instance.phone != null)
+        {
+            CellPhoneScriptDutch.Instance.MoveCellphoneDown();
+        }
     }
 
     public void OpenSettingsInMainMenu()
@@ -90,5 +91,11 @@ public class AudioVolumeController : MonoBehaviour
         {
             audioSource.volume = volume;
         }
+    }
+
+    public void GoToMainMenu()
+    {
+        // Load the MainMenu
+        SceneManager.LoadScene(0);
     }
 }

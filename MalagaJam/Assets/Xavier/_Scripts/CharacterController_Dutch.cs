@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class CharacterController_Dutch : MonoBehaviour
 {
@@ -60,7 +58,7 @@ public class CharacterController_Dutch : MonoBehaviour
     public GameObject[] tutorialTexts;
     private int currentTutorialText = 1;
     private int previousTutorialText = 0;
-    public GameObject pauseMenu, optionsMenu;
+    public GameObject optionsMenu;
 
     [Header("Clients")]
     public bool outOfTime;
@@ -73,12 +71,16 @@ public class CharacterController_Dutch : MonoBehaviour
     public TextMeshProUGUI madClientsText;
     public TextMeshProUGUI notGivenEnoughTicketsClientsText;
 
-    public int clientSatisfactionScore;
+    private int clientSatisfactionScore;
     public TextMeshProUGUI clientSatisfactionScoreText;
+    public GameObject clientSatisfactionArrow;
+    [SerializeField] private int clientSatisfactionArrowScore;
 
     void Start()
     {
         clientSatisfactionScoreText.text = clientSatisfactionScore.ToString("D6");
+        clientSatisfactionArrowScore = -65;
+        clientSatisfactionArrow.transform.Rotate(0, 0, clientSatisfactionArrowScore);
         givenTooMuchMoneyClients = 0;
         perfectClients = 0;
         madClients = 0;
@@ -96,7 +98,7 @@ public class CharacterController_Dutch : MonoBehaviour
 
     void Update()
     {
-        if (isTutorial && Input.GetKeyDown(KeyCode.Mouse0) && !pauseMenu.activeSelf && !optionsMenu.activeSelf)
+        if (isTutorial && Input.GetKeyDown(KeyCode.Mouse0) && !optionsMenu.activeSelf)
         {
             Time.timeScale = 1f; // Set time scale back to 1 to resume the game
             if (currentTutorialText < tutorialTexts.Length)
@@ -168,17 +170,16 @@ public class CharacterController_Dutch : MonoBehaviour
             if (moneyOnSurface > moneyShouldBeLeft) {
                 Debug.Log($"You left €{moneyOnSurface - moneyShouldBeLeft} more than the actual ticketprices");
                 givenTooMuchMoneyClients++;
-                if (clientSatisfactionScore > 0)
-                {
-                    clientSatisfactionScore += Random.Range(3, 8);
-                }
+                clientSatisfactionArrowScore -= Random.Range(7, 14);
+                clientSatisfactionScore += Random.Range(3, 8);
+
                 StartCoroutine(PopUpReaction(3));
             }
             else if (moneyOnSurface == moneyShouldBeLeft)
             {
                 Debug.Log("Perfect");
                 perfectClients++;
-
+                clientSatisfactionArrowScore -= Random.Range(8, 16);
                 clientSatisfactionScore += Random.Range(121, 164);
                 StartCoroutine(PopUpReaction(2));
 
@@ -187,6 +188,7 @@ public class CharacterController_Dutch : MonoBehaviour
             {
                 Debug.Log($"You gave €{moneyOnSurface - moneyShouldBeLeft} less change than the actual ticketprices");
                 Debug.Log("ClientIsMad");
+                clientSatisfactionArrowScore += Random.Range(27, 34);
                 clientSatisfactionScore -= Random.Range(23, 34);
                 madClients++;
                 StartCoroutine(PopUpReaction(1));
@@ -196,6 +198,7 @@ public class CharacterController_Dutch : MonoBehaviour
         {
             Debug.Log("NotEnoughTickets");
             notGivenEnoughTicketsClients++;
+            clientSatisfactionArrowScore += Random.Range(27, 34);
             clientSatisfactionScore -= Random.Range(12, 17);
             StartCoroutine(PopUpReaction(0));
         }
@@ -210,6 +213,18 @@ public class CharacterController_Dutch : MonoBehaviour
         {
             clientSatisfactionScore = 0;
         }
+        if (clientSatisfactionArrowScore > 65)
+        {
+            clientSatisfactionArrowScore = 65;
+        }
+        if (clientSatisfactionArrowScore < -65)
+        {
+            clientSatisfactionArrowScore = -65;
+        }
+
+        Vector3 newRotation = new Vector3(0, 0, clientSatisfactionArrowScore);
+        clientSatisfactionArrow.transform.rotation = Quaternion.Euler(newRotation);
+
         clientSatisfactionScoreText.text = clientSatisfactionScore.ToString("D6");
 
         if (!outOfTime)
