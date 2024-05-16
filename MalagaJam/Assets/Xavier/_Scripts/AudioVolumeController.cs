@@ -1,9 +1,34 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class AudioVolumeController : MonoBehaviour
 {
+    #region Singleton
+
+    private static AudioVolumeController _instance;
+    public static AudioVolumeController Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<AudioVolumeController>();
+
+                if (_instance == null)
+                {
+                    GameObject obj = new GameObject();
+                    obj.name = typeof(AudioVolumeController).Name;
+                    _instance = obj.AddComponent<AudioVolumeController>();
+                }
+            }
+            return _instance;
+        }
+    }
+
+    #endregion
+
     [Header("Volume")]
     public Slider volumeSlider;
     private const string VolumeKey = "Volume";
@@ -12,6 +37,16 @@ public class AudioVolumeController : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject mainMenu, options;
     float gameVolume;
+
+    [Header("Buttons")]
+    public GameObject startButton;
+    public GameObject tutorialButton;
+    public GameObject optionsButton;
+    public GameObject volumeSliderButton;
+    public GameObject saveOptionsButton;
+
+    private bool controllerIsAlreadyConnected = false;
+
 
     private void Start()
     {
@@ -27,8 +62,37 @@ public class AudioVolumeController : MonoBehaviour
         volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
     }
 
+    void Update()
+    {
+        if (ControllerCursor.Instance.isControllerConnected && !controllerIsAlreadyConnected && !options.activeSelf)
+        {
+            EventSystem.current.SetSelectedGameObject(startButton);
+            controllerIsAlreadyConnected = true;
+        }
+        if (!ControllerCursor.Instance.isControllerConnected && !controllerIsAlreadyConnected && !options.activeSelf)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            controllerIsAlreadyConnected = false;
+        }
+
+        if (ControllerCursor.Instance.isControllerConnected && !controllerIsAlreadyConnected && options.activeSelf)
+        {
+            EventSystem.current.SetSelectedGameObject(saveOptionsButton);
+            controllerIsAlreadyConnected = true;
+        }
+        if (!ControllerCursor.Instance.isControllerConnected && options.activeSelf)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            controllerIsAlreadyConnected = false;
+        }
+    }
+
     public void OpenSettings()
     {
+        if (ControllerCursor.Instance.isControllerConnected)
+        {
+            EventSystem.current.SetSelectedGameObject(saveOptionsButton);
+        }
         pauseMenu.SetActive(false);
         options.SetActive(true);
         SetVolume(gameVolume);
@@ -41,18 +105,21 @@ public class AudioVolumeController : MonoBehaviour
 
     public void ConfirmSettings()
     {
+        if (ControllerCursor.Instance.isControllerConnected)
+        {
+            EventSystem.current.SetSelectedGameObject(optionsButton);
+        }
         pauseMenu.SetActive(true);
         options.SetActive(false);
         SetVolume(gameVolume);
-
-        if (CellPhoneScriptDutch.Instance.phone != null)
-        {
-            CellPhoneScriptDutch.Instance.MoveCellphoneDown();
-        }
     }
 
     public void OpenSettingsInMainMenu()
     {
+        if (ControllerCursor.Instance.isControllerConnected)
+        {
+            EventSystem.current.SetSelectedGameObject(saveOptionsButton);
+        }
         mainMenu.SetActive(false);
         options.SetActive(true);
         SetVolume(gameVolume);
@@ -65,6 +132,10 @@ public class AudioVolumeController : MonoBehaviour
 
     public void ConfirmSettingsInMainMenu()
     {
+        if (ControllerCursor.Instance.isControllerConnected)
+        {
+            EventSystem.current.SetSelectedGameObject(optionsButton);
+        }
         mainMenu.SetActive(true);
         options.SetActive(false);
         SetVolume(gameVolume);
@@ -97,5 +168,9 @@ public class AudioVolumeController : MonoBehaviour
     {
         // Load the MainMenu
         SceneManager.LoadScene(0);
+    }
+    public void RetryButton()
+    {
+        SceneManager.LoadScene(1);
     }
 }

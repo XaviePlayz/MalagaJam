@@ -44,31 +44,34 @@ public class CellPhoneScriptDutch : MonoBehaviour, IPointerClickHandler
     private bool up = false;
     private Coroutine moveCoroutine;
 
+    public GameObject settingsButton;
     IEnumerator LerpPosition(Vector3 targetPosition, float duration)
     {
-        if (!optionsMenu.activeInHierarchy)
+        // Stop transition if it is already moving
+        float time = 0;
+        RectTransform rt = this.GetComponent<RectTransform>();
+        Vector3 startPosition = rt.anchoredPosition;
+        while (time < duration)
         {
-            // Stop transition if it is already moving
-            float time = 0;
-            RectTransform rt = this.GetComponent<RectTransform>();
-            Vector3 startPosition = rt.anchoredPosition;
-            while (time < duration)
-            {
-                rt.anchoredPosition = Vector3.Lerp(startPosition, targetPosition, time / duration);
-                time += Time.deltaTime;
-                yield return null;
-            }
-            rt.anchoredPosition = targetPosition;
-        }       
+            rt.anchoredPosition = Vector3.Lerp(startPosition, targetPosition, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        rt.anchoredPosition = targetPosition;
     }
 
-
-    public void OnPointerClick(PointerEventData eventData)
+    private void Update()
     {
-        if (!optionsMenu.activeInHierarchy)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             ChangeCellPos();
         }
+
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        ChangeCellPos();
     }
 
     public void ChangeCellPos()
@@ -86,6 +89,20 @@ public class CellPhoneScriptDutch : MonoBehaviour, IPointerClickHandler
     private void MoveCellphoneUp()
     {
         up = true;
+
+        if (ControllerCursor.Instance.isControllerConnected)
+        {
+            if (ControllerCursor.Instance.cursor != null)
+            {
+                ControllerCursor.Instance.cursor.GetComponent<Image>().enabled = false;
+                EventSystem.current.SetSelectedGameObject(settingsButton);
+            }
+        }
+        if (!ControllerCursor.Instance.isControllerConnected)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+
         if (moveCoroutine != null)
         {
             StopCoroutine(moveCoroutine);
@@ -97,6 +114,20 @@ public class CellPhoneScriptDutch : MonoBehaviour, IPointerClickHandler
         if (!optionsMenu.activeSelf)
         {
             up = false;
+
+            if (ControllerCursor.Instance.isControllerConnected)
+            {
+                if (ControllerCursor.Instance.cursor != null)
+                {
+                    ControllerCursor.Instance.cursor.GetComponent<Image>().enabled = true;
+                    EventSystem.current.SetSelectedGameObject(null);
+                }
+            }
+            if (!ControllerCursor.Instance.isControllerConnected)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+            }
+
             if (moveCoroutine != null)
             {
                 StopCoroutine(moveCoroutine);

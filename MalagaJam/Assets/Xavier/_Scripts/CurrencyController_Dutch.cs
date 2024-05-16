@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class CurrencyController_Dutch : MonoBehaviour
 {
@@ -83,10 +84,12 @@ public class CurrencyController_Dutch : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other) 
     {
+        other.GetComponent<DragAndDrop>().onCounter = true;
+
         if (other.gameObject.CompareTag("€0.50")) 
-        { 
+        {
             TotalMoney+=0.50f;
-            Debug.Log("+€0.50, total " + TotalMoney); 
+            Debug.Log("+€0.50, total " + TotalMoney);
             other.GetComponent<SpriteRenderer>().sprite = placed50;
             coinsInCounter.Add(other.gameObject);
         }         
@@ -125,8 +128,10 @@ public class CurrencyController_Dutch : MonoBehaviour
         }
     }
     
-    public void OnTriggerExit2D(Collider2D other) 
+    public void OnTriggerExit2D(Collider2D other)
     {
+        other.GetComponent<DragAndDrop>().onCounter = false;
+
         if (other.gameObject.CompareTag("€0.50")) 
         {
             TotalMoney -= 0.50f;

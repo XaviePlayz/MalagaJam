@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class CoinGiveWrapper_Dutch
 {
@@ -62,6 +64,7 @@ public class TicketController_Dutch : MonoBehaviour
     public float pricePerChild;
     public int difficulty; // 0 = Easy, 1 = Normal, 2 = Hard
     public GameObject difficultyButtons;
+    public GameObject difficultyAutoSelectButton;
     
     public SpriteRenderer priceBoard;
     public Sprite PriceBoard_Easy;
@@ -76,6 +79,7 @@ public class TicketController_Dutch : MonoBehaviour
     [SerializeField] public float totalTicketPrice;
     [SerializeField] public float receivedMoney;
 
+    private bool controllerIsAlreadyConnected = false;
     void Start()
     {
         characterController = FindObjectOfType<CharacterController_Dutch>();
@@ -92,6 +96,17 @@ public class TicketController_Dutch : MonoBehaviour
 
     void Update()
     {
+        if (ControllerCursor.Instance.isControllerConnected && !controllerIsAlreadyConnected)
+        {
+            EventSystem.current.SetSelectedGameObject(difficultyAutoSelectButton);
+            controllerIsAlreadyConnected = true;
+        }
+        if (!ControllerCursor.Instance.isControllerConnected && !controllerIsAlreadyConnected)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            controllerIsAlreadyConnected = false;
+        }
+
         if (characterController.currentNPC != null)
         {
             if (difficulty == 0)
@@ -184,7 +199,7 @@ public class TicketController_Dutch : MonoBehaviour
 
             for (int i = 0; i < coinAmount50Cents; i++)
             {
-                Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
+                Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
                 var coin = Instantiate(Coin50Cents, pos, Quaternion.identity);
                 coin.transform.parent = pLayer;
                 receivedMoney += 0.50f;
@@ -192,7 +207,7 @@ public class TicketController_Dutch : MonoBehaviour
 
             for (int i = 0; i < coinAmount1Euro; i++)
             {
-                Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
+                Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
                 var coin = Instantiate(Coin1Euro, pos, Quaternion.identity);
                 coin.transform.parent = pLayer;
                 receivedMoney += 1.0f;
@@ -200,7 +215,7 @@ public class TicketController_Dutch : MonoBehaviour
 
             for (int i = 0; i < coinAmount5Euro; i++)
             {
-                Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
+                Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
                 var coin = Instantiate(Coin5Euro, pos, Quaternion.identity);
                 coin.transform.parent = pLayer;
                 receivedMoney += 5.0f;
@@ -208,7 +223,7 @@ public class TicketController_Dutch : MonoBehaviour
 
             for (int i = 0; i < coinAmount10Euro; i++)
             {
-                Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
+                Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
                 var coin = Instantiate(Coin10Euro, pos, Quaternion.identity);
                 coin.transform.parent = pLayer;
                 receivedMoney += 10.0f;
@@ -226,7 +241,7 @@ public class TicketController_Dutch : MonoBehaviour
 
                 for (int i = 0; i < coinAmount50Cents; i++)
                 {
-                    Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
+                    Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
                     var coin = Instantiate(Coin50Cents, pos, Quaternion.identity);
                     coin.transform.parent = pLayer;
                     receivedMoney += 0.50f;
@@ -234,7 +249,7 @@ public class TicketController_Dutch : MonoBehaviour
 
                 for (int i = 0; i < coinAmount1Euro; i++)
                 {
-                    Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
+                    Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
                     var coin = Instantiate(Coin1Euro, pos, Quaternion.identity);
                     coin.transform.parent = pLayer;
                     receivedMoney += 1.0f;
@@ -244,7 +259,7 @@ public class TicketController_Dutch : MonoBehaviour
                 {
                     if (totalTicketPrice > 5)
                     {
-                        Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
+                        Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
                         var coin = Instantiate(Coin5Euro, pos, Quaternion.identity);
                         coin.transform.parent = pLayer;
                         receivedMoney += 5.0f;
@@ -259,7 +274,7 @@ public class TicketController_Dutch : MonoBehaviour
                 {
                     if (totalTicketPrice > 10)
                     {
-                        Vector3 pos = new Vector3(Random.Range(xMin, xMax) + pm.frontlayerParallax.x, Random.Range(yMin, yMax) + pm.frontlayerParallax.y, -5);
+                        Vector3 pos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -5);
                         var coin = Instantiate(Coin10Euro, pos, Quaternion.identity);
                         coin.transform.parent = pLayer;
                         receivedMoney += 10.0f;
@@ -294,6 +309,7 @@ public class TicketController_Dutch : MonoBehaviour
 
     void DifficultySelected()
     {
+        ControllerCursor.Instance.cursor.GetComponent<Image>().enabled = true;
         gameStarted = true;
         Time.timeScale = 1f; // Set time scale back to 1 to resume the game
         difficultyButtons.SetActive(false);

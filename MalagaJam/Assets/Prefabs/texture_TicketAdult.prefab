@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: fade47de447dee446bb0fa3a354f10d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a9f41f3d7791d429a538fcc5ec8acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onCounter: 0
   ticketInventory: {fileID: 0}
   ticket: {fileID: 7984732009543597408}
   draggingTicket: {fileID: 0}
@@ -106,6 +107,18 @@ MonoBehaviour:
   PlacedChildrenTickets: {fileID: 21300000, guid: cfe58562037bcb64f9297765abe7d2bf, type: 3}
   AdultTickets: {fileID: 21300000, guid: fade47de447dee446bb0fa3a354f10d0, type: 3}
   ChildrenTickets: {fileID: 21300000, guid: 4f8812a619dd9b244aa52ecd4d8cd90e, type: 3}
+  _50Cents: 0
+  _1Euro: 0
+  _5Euros: 0
+  _10Euros: 0
+  Hover50: {fileID: 0}
+  HoverPlaced50: {fileID: 0}
+  Hover100: {fileID: 0}
+  HoverPlaced100: {fileID: 0}
+  Hover500: {fileID: 0}
+  HoverPlaced500: {fileID: 0}
+  Hover1000: {fileID: 0}
+  HoverPlaced1000: {fileID: 0}
 --- !u!61 &1604901669197584435
 BoxCollider2D:
   m_ObjectHideFlags: 0

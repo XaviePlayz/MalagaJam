@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 // Use: Create an object with the following structure:
@@ -19,6 +21,8 @@ public class ClockManager_Dutch : MonoBehaviour
     public float totalTimeSeconds = 30f;
 
     public GameObject gameStats;
+    private bool controllerIsAlreadyConnected = false;
+
     static public GameObject getChildGameObject(GameObject fromGameObject, string withName)
     {
         Transform[] ts = fromGameObject.transform.GetComponentsInChildren<Transform>();
@@ -49,6 +53,21 @@ public class ClockManager_Dutch : MonoBehaviour
             CharacterController_Dutch.Instance.notGivenEnoughTicketsClientsText.text = $"{CharacterController_Dutch.Instance.notGivenEnoughTicketsClients}";
             gameStats.SetActive(true);
             CharacterController_Dutch.Instance.LastCustomerLeaves();
+
+            if (ControllerCursor.Instance.isControllerConnected && !controllerIsAlreadyConnected)
+            {
+                if (ControllerCursor.Instance.cursor != null)
+                {
+                    ControllerCursor.Instance.cursor.GetComponent<Image>().enabled = false;
+                    EventSystem.current.SetSelectedGameObject(CharacterController_Dutch.Instance.autoSelectedButton);
+                }
+                controllerIsAlreadyConnected = true;
+            }
+            if (!ControllerCursor.Instance.isControllerConnected && !controllerIsAlreadyConnected)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                controllerIsAlreadyConnected = false;
+            }
         }
 
     }

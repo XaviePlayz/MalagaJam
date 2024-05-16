@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CharacterController_Dutch : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class CharacterController_Dutch : MonoBehaviour
 
     #endregion
 
+    Collider2D col;
     public GameObject currentNPC;
     public bool isHelping;
     public GameObject destroyPreviousNPC;
@@ -70,6 +72,7 @@ public class CharacterController_Dutch : MonoBehaviour
     public TextMeshProUGUI perfectClientsText;
     public TextMeshProUGUI madClientsText;
     public TextMeshProUGUI notGivenEnoughTicketsClientsText;
+    public GameObject autoSelectedButton;
 
     private int clientSatisfactionScore;
     public TextMeshProUGUI clientSatisfactionScoreText;
@@ -78,6 +81,8 @@ public class CharacterController_Dutch : MonoBehaviour
 
     void Start()
     {
+        ControllerCursor.Instance.cursor.GetComponent<Image>().enabled = false;
+
         clientSatisfactionScoreText.text = clientSatisfactionScore.ToString("D6");
         clientSatisfactionArrowScore = -65;
         clientSatisfactionArrow.transform.Rotate(0, 0, clientSatisfactionArrowScore);
@@ -94,11 +99,41 @@ public class CharacterController_Dutch : MonoBehaviour
         };
         clickEvent.callback.AddListener(CorrectedCurrency);
         evTrig.triggers.Add(clickEvent);
+        col = bell.GetComponent<Collider2D>();
     }
 
     void Update()
     {
-        if (isTutorial && Input.GetKeyDown(KeyCode.Mouse0) && !optionsMenu.activeSelf)
+        // Get the world position of the controller cursor
+        Vector3 controllerCursorPos = Camera.main.ScreenToWorldPoint(ControllerCursor.Instance.cursorRectTransform.position);
+        controllerCursorPos.z = 0f; // Set the Z position for the overlap check
+
+        if (Input.GetButtonDown("ControllerInteract"))
+        {
+            if (col == Physics2D.OverlapPoint(controllerCursorPos))
+            {
+                ClickOnBell();
+            }
+        }
+
+        if (isTutorial)
+        {
+            ControllerCursor.Instance.cursor.GetComponent<Image>().enabled = true;
+            if (Input.GetButtonDown("ControllerCancel"))
+            {
+                AudioVolumeController.Instance.GoToMainMenu();
+            }
+        }
+        else
+        {
+            if (Input.GetButtonDown("ControllerMenuButton"))
+            {
+                CellPhoneScriptDutch.Instance.ChangeCellPos();               
+            }
+        }
+
+
+        if (isTutorial && Input.GetKeyDown(KeyCode.Mouse0) && !optionsMenu.activeSelf || isTutorial && Input.GetButtonDown("ControllerInteract") && !optionsMenu.activeSelf)
         {
             Time.timeScale = 1f; // Set time scale back to 1 to resume the game
             if (currentTutorialText < tutorialTexts.Length)
@@ -113,11 +148,12 @@ public class CharacterController_Dutch : MonoBehaviour
             if (currentTutorialText == tutorialTexts.Length)
             {
                 TicketController_Dutch.Instance.gameStarted = true;
+                ControllerCursor.Instance.cursor.GetComponent<Image>().enabled = true;
             }
             previousTutorialText++;
             currentTutorialText++;
         }
-        if (isTutorial && Input.GetKeyDown(KeyCode.Mouse0) && tutorialTexts[1].activeSelf)
+        if (isTutorial && Input.GetKeyDown(KeyCode.Mouse0) && tutorialTexts[1].activeSelf || isTutorial && Input.GetButtonDown("ControllerInteract") && tutorialTexts[1].activeSelf)
         {
             SendNextCharacter();
         }
@@ -238,6 +274,11 @@ public class CharacterController_Dutch : MonoBehaviour
     }
     public void CorrectedCurrency(BaseEventData eventData)
     {
+        ClickOnBell();
+    }
+
+    public void ClickOnBell()
+    {
         if (isHelping)
         {
             StartCoroutine(PressedBell());
@@ -260,7 +301,7 @@ public class CharacterController_Dutch : MonoBehaviour
             CurrencyController_Dutch.Instance.totalChildrentickets = 0;
             TicketController_Dutch.Instance.receivedMoney = 0;
             StartCoroutine(CustomerLeaves());
-        }       
+        }
     }
     public void LastCustomerLeaves()
     {
@@ -286,6 +327,7 @@ public class CharacterController_Dutch : MonoBehaviour
             TicketController_Dutch.Instance.receivedMoney = 0;
             StartCoroutine(CustomerLeaves());
         }
+        CellPhoneScriptDutch.Instance.phone.SetActive(false);
     }
 
     public IEnumerator PressedBell()

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3806973161029654782}
   - component: {fileID: 5769468986193226782}
   - component: {fileID: 344534910651328866}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TotalMoney: 0
-  placed25: {fileID: 21300000, guid: ea88d18195f54fa4f8d542895030d8cc, type: 3}
-  unplaced25: {fileID: 21300000, guid: 79485446ec3f7bf49996e4c1f6d65db6, type: 3}
+  placed50: {fileID: 0}
+  unplaced50: {fileID: 0}
   placed100: {fileID: 21300000, guid: 443c0920f143ed047be036c861919597, type: 3}
   unplaced100: {fileID: 21300000, guid: a6070488f9b07cf43b011eae6f7516f6, type: 3}
   placed500: {fileID: 21300000, guid: e559e5e98f27c04419b977aad94ec7eb, type: 3}
@@ -182,14 +182,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 2.5427752, y: 0.4468644}
-      - {x: -2.5795078, y: 0.44769803}
-      - {x: -2.7017748, y: 0.40838695}
-      - {x: -3.2778485, y: -0.23907188}
-      - {x: -3.280111, y: -0.2942815}
-      - {x: -3.1307843, y: -0.33674714}
-      - {x: 3.1508148, y: -0.32715484}
-      - {x: 3.2344835, y: -0.3079275}
-      - {x: 3.27211, y: -0.25219136}
-      - {x: 2.6850996, y: 0.41524214}
+    - - {x: 2.4488893, y: 0.40930966}
+      - {x: -2.424595, y: 0.41014317}
+      - {x: -2.4576697, y: 0.3989984}
+      - {x: -2.939856, y: -0.22498891}
+      - {x: -2.9515076, y: -0.24733794}
+      - {x: -2.8209586, y: -0.26163802}
+      - {x: 2.9395702, y: -0.26143414}
+      - {x: 2.948129, y: -0.25159562}
+      - {x: 2.9622843, y: -0.22402543}
+      - {x: 2.5771296, y: 0.2744123}
   m_UseDelaunayMesh: 0

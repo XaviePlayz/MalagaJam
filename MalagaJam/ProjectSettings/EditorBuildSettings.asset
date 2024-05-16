@@ -17,4 +17,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Xavier/Scenes/Tutorial_Dutch.unity
     guid: 839dbd5505a75f04aa2bd1c9ff62d4e6
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 9ec28370fe9ae754e89c479aa7d42770, type: 2}
