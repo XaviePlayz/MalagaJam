@@ -3426,11 +3426,11 @@ MonoBehaviour:
   Coin1Euro: {fileID: 4509506718041636590, guid: ba3933bdad6b34443858e81ff194c7ae, type: 3}
   Coin5Euro: {fileID: 5909838258447696271, guid: edcaddde7d2e34d46bc661df9b487840, type: 3}
   Coin10Euro: {fileID: 6693504481057332780, guid: d9668608feed0b64989d524265dc49d5, type: 3}
-  xMin: -3
-  xMax: 2.5
+  xMin: 2.5
+  xMax: -2.5
   pLayer: {fileID: 1188189940}
   yMin: -2
-  yMax: -1.5
+  yMax: -2.5
   pricePerAdult: 7
   pricePerChild: 3.5
   difficulty: 0
