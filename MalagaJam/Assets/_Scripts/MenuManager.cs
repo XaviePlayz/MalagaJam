@@ -29,8 +29,12 @@ public class MenuManager : MonoBehaviour
         creditsObject.SetActive(false);
         menuObject.SetActive(true);
     }
-    public void Quit()
+    public void ExitGame()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 }
